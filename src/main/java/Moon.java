@@ -4,12 +4,12 @@ import java.util.Scanner;
 // OT: The chatbot is named Moon after my pet puppy, that's why there's a puppy in the logo.
 public class Moon {
 
-    private String[] taskList;  // list of task
+    private Task[] taskList;  // list of task
     private int listIndex;  // list index
 
     // Constructor for class Moon
     public Moon() {
-        this.taskList = new String[100];
+        this.taskList = new Task[100];
         this.listIndex = 0;
     }
 
@@ -66,7 +66,8 @@ public class Moon {
                 System.out.println("\t\t  Woof!\n");
             } else {
                 // Add item into the list, returning a successful message
-                taskList[listIndex] = userInput;
+                Task newTask = new Task(userInput);
+                taskList[listIndex] = newTask;
                 listIndex += 1;
                 System.out.printf("\tMoon: '%s' is added! Woof!\n", userInput);
             }
