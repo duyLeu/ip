@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public boolean getDone() {
+    private boolean getDone() {
         return this.isDone;
     }
 
@@ -21,7 +21,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.getDone() ? "[X] " + this.name
-                              : "[ ] " + this.name;
+        return this.getDone()
+                ? "[X] " + this.name
+                : "[ ] " + this.name;
     }
 }
