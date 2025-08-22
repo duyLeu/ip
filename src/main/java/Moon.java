@@ -36,10 +36,19 @@ public class Moon {
     }
 
     // display the task list
-    public void getListDisplay() {
+    public void getTaskList() {
+        System.out.println("\tMoon: Here are the items in your list!");
         for (int i = 0; i < listIndex; i++) {
             System.out.printf("\t\t  %d. %s\n", i + 1, taskList[i]);
         }
+        System.out.println("\t\t  Woof!\n");
+    }
+
+    // add task into the list
+    public void addTask(Task task) {
+        taskList[listIndex] = task;
+        listIndex += 1;
+        System.out.printf("\tMoon: Copy that! I've added this task!\n\t\t\t%s\n", task);
     }
 
     // print out the horizontal lines top and bottom of an answer
@@ -47,44 +56,31 @@ public class Moon {
         System.out.println("\t____________________________________________________________");
     }
 
+    public void setTaskDone(String input, boolean isDone) {
+        int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+        if (isDone) {
+            taskList[taskIndex].setDone();
+            System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
+                    taskList[taskIndex]);
+        } else{
+            taskList[taskIndex].setNotDone();
+            System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
+                    taskList[taskIndex]);
+        }
+    }
+
     // handle the string input
     public int handleInput(String input) {
         try {
             Command command = Command.fromString(input);
             switch (command) {
-                case EXIT:
-                    this.getExitMessage();
-                    break;
-                case LIST:
-                    // Display all the items in the list
-                    System.out.println("\tMoon: Here are the items in your list!");
-                    this.getListDisplay();
-                    System.out.println("\t\t  Woof!\n");
-                    break;
-                case MARK:
-                    // extract the index and set done accordingly
-                    int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    taskList[markIndex].setDone();
-                    System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
-                            taskList[markIndex]);
-                    break;
-                case UNMARK:
-                    // extract the index and set undone accordingly
-                    int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    taskList[unmarkIndex].setNotDone();
-                    System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
-                            taskList[unmarkIndex]);
-                    break;
-                case TODO:
-                    String taskName = input.substring(5);
-                    Task newTask = new Task(taskName);
-                    taskList[listIndex] = newTask;
-                    listIndex += 1;
-                    System.out.printf("\tMoon: '%s' is added! Woof!\n", taskName);
-                case DEADLINE:
-                    break;
-                case EVENT:
-                    break;
+                case EXIT -> getExitMessage();
+                case LIST -> getTaskList();
+                case MARK -> setTaskDone(input, true);
+                case UNMARK -> setTaskDone(input, false);
+                case TODO -> addTask(Todo.fromString(input));
+                case DEADLINE -> addTask(Deadline.fromString(input));
+                case EVENT -> addTask(Event.fromString(input));
             }
             return command.getStatusCode();
         } catch (IllegalAccessException e) {

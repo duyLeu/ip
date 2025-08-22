@@ -11,6 +11,10 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    public static Deadline fromString(String input) {
+
+    }
+
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.getDeadline());

@@ -16,6 +16,10 @@ public class Event extends Task{
         return this.toTime;
     }
 
+    public static Event fromString(String input) {
+
+    }
+
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), this.getFromTime(), this.getToTime());
