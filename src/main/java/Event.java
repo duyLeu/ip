@@ -18,7 +18,7 @@ public class Event extends Task{
 
     public static Event fromString(String input) throws ParseException, EmptyArgumentException {
         String[] inputList = input.split(" /");
-        if (inputList.length != 2) {
+        if (inputList.length != 3) {
             throw new ParseException(input, Command.EVENT,
                     "Wuf! Are you missing a dash '/' somewhere?");
         }

@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class Moon {
 
     private final ArrayList<Task> taskList;  // list of task
-    private int listIndex;  // list index
 
     // Constructor for class Moon
     public Moon() {
         this.taskList = new ArrayList<>();
-        this.listIndex = 0;
     }
 
     // display greeting message
@@ -39,7 +37,7 @@ public class Moon {
     // display the task list
     public void getTaskList() {
         System.out.println("\tMoon: Here are the items in your list!");
-        for (int i = 0; i < listIndex; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("\t\t  %d. %s\n", i + 1, taskList.get(i));
         }
         System.out.println("\t\t  Woof!");
@@ -48,7 +46,6 @@ public class Moon {
     // add task into the list
     public void addTask(Task task) {
         taskList.add(task);
-        listIndex += 1;
         System.out.printf("\tMoon: Copy that! I've added this task!\n\t\t\t%s\n", task);
     }
 
