@@ -52,12 +52,28 @@ public class Moon {
         System.out.printf("\tMoon: Copy that! I've added this task!\n\t\t\t%s\n", task);
     }
 
+    public void deleteTask(String input) throws InvalidIndexException {
+        try {
+            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+            Task removedTask = taskList.remove(taskIndex);
+            System.out.printf("\tMoon: Copy that! I've deleted this task! Woof!\n\t\t\t%s\n",
+                    removedTask);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException(Command.DELETE,
+                    "Wuf! I can't recognize your index. Are you sure it's an integer?");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(Command.DELETE,
+                    "Wuf! Your index is out of range!");
+        }
+    }
+
     // print out the horizontal lines top and bottom of an answer
     public void getHorizontalLines() {
         System.out.println("\t____________________________________________________________");
     }
 
     public void setTaskDone(String input, boolean isDone) throws InvalidIndexException {
+        Command commandType = isDone ? Command.MARK : Command.UNMARK;
         try {
             int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
             Task taskToSet = taskList.get(taskIndex);
@@ -71,9 +87,11 @@ public class Moon {
                         taskToSet);
             }
         } catch (NumberFormatException e) {
-            throw new InvalidIndexException("Wuf! I can't recognize your index. Are you sure it's an integer?");
+            throw new InvalidIndexException(commandType,
+                    "Wuf! I can't recognize your index. Are you sure it's an integer?");
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIndexException("Wuf! Your index is out of range!");
+            throw new InvalidIndexException(commandType,
+                    "Wuf! Your index is out of range!");
         }
     }
 
@@ -89,6 +107,7 @@ public class Moon {
                 case TODO -> addTask(Todo.fromString(input));
                 case DEADLINE -> addTask(Deadline.fromString(input));
                 case EVENT -> addTask(Event.fromString(input));
+                case DELETE -> deleteTask(input);
             }
             return command.getStatusCode();
 

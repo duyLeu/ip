@@ -9,7 +9,8 @@ public enum Command {
     UNMARK("unmark", "unmark {task number}", 5),
     TODO("todo", "todo {task description}", 6),
     DEADLINE("deadline", "deadline {task description} \\by {deadline time}", 7),
-    EVENT("event", "event {task description} \\from {start time} \\by {end time}", 8);
+    EVENT("event", "event {task description} \\from {start time} \\by {end time}", 8),
+    DELETE("delete", "delete {task number}", 9);
 
     private final String keyword;
     private final String format;

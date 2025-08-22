@@ -1,5 +1,5 @@
-public class InvalidIndexException extends MoonException {
-    public InvalidIndexException(String message) {
-        super(message);
+public class InvalidIndexException extends CommandProcessingException {
+    public InvalidIndexException(Command command, String message) {
+        super(command, message);
     }
 }
