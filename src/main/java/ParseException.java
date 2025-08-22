@@ -1,17 +1,18 @@
-public class ParseException extends MoonException {
+public class ParseException extends CommandProcessingException {
     private String parseError;
+    private Command command;
 
-    public ParseException(String message) {
-        super(message);
+    public ParseException(Command command, String message) {
+        super(command, message);
     }
 
-    public ParseException(String parseError, String message) {
-        super(message);
+    public ParseException(String parseError, Command command, String message) {
+        super(command, message);
         this.parseError = parseError;
     }
 
     @Override
     public String getMessage() {
-        return String.format("Hmmmm, I don't recognize this keyword '%s'", this.parseError);
+        return super.getMessage();
     }
 }

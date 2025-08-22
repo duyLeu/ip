@@ -83,10 +83,10 @@ public class Moon {
                 case EVENT -> addTask(Event.fromString(input));
             }
             return command.getStatusCode();
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException("Unknown command.");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid task number.");
+
+        } catch (MoonException e) {
+            System.out.println(e.getMessage());
+            return -1;
         }
     }
 
@@ -104,15 +104,10 @@ public class Moon {
             this.getAskingMessage();
             // scan user input
             String userInput = myScanner.nextLine();
-            // process user input, while returning
-            try {
-                this.getHorizontalLines();
-                statusCode = this.handleInput(userInput);
-                this.getHorizontalLines();
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid command. Reason: " + e.getMessage());
-                statusCode = -1;
-            }
+            // process user input, while returning a status code
+            this.getHorizontalLines();
+            statusCode = this.handleInput(userInput);
+            this.getHorizontalLines();
         }
     }
 }

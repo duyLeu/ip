@@ -10,10 +10,17 @@ public class InvalidCommandException extends MoonException {
         this.invalidCommand = invalidCommand;
     }
 
-    private String[] findSimilarCommand()
+    private String findSimilarCommand() {
+        return Command.getCommandStream()
+                .map(Command::getKeyword)
+                .filter(c -> c.startsWith(this.invalidCommand.substring(0,2)))
+                .findFirst()
+                .map(c -> String.format("Do you mean '%s'?", c))
+                .orElse("");
+    }
 
     @Override
     public String getMessage() {
-        return String.format("Sorry, I don't recognize this command '%s'", this.invalidCommand);
+        return String.format("%s: '%s'. %s", super.getMessage(), this.invalidCommand, this.findSimilarCommand());
     }
 }

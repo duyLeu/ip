@@ -3,19 +3,21 @@ import java.util.stream.*;
 import java.util.Optional;
 
 public enum Command {
-    EXIT("bye", 0), // status code 1 is default for running
-    LIST("list", 2),
-    MARK("mark", 4),
-    UNMARK("unmark", 5),
-    TODO("todo", 6),
-    DEADLINE("deadline", 7),
-    EVENT("event", 8);
+    EXIT("bye", "bye", 0), // status code 1 is default for running
+    LIST("list", "list", 2),
+    MARK("mark", "mark {task number}", 4),
+    UNMARK("unmark", "unmark {task number}", 5),
+    TODO("todo", "todo {task description}", 6),
+    DEADLINE("deadline", "deadline {task description} \\by {deadline time}", 7),
+    EVENT("event", "event {task description} \\from {start time} \\by {end time}", 8);
 
     private final String keyword;
+    private final String format;
     private final int statusCode;
 
-    Command(String keyword, int statusCode) {
+    Command(String keyword, String format, int statusCode) {
         this.keyword = keyword;
+        this.format = format;
         this.statusCode = statusCode;
     }
 
@@ -23,16 +25,24 @@ public enum Command {
         return this.keyword;
     }
 
+    public String getFormat() {
+        return this.format;
+    }
+
     public int getStatusCode() {
         return this.statusCode;
     }
 
-    public static Command fromString(String input) throws IllegalAccessException {
+    public static Stream<Command> getCommandStream() {
+        return Arrays.stream(Command.values());
+    }
+
+    public static Command fromString(String input) throws InvalidCommandException {
         String inputKeyword = input.split(" ")[0];
-        Stream<Command> commandStream = Arrays.stream(Command.values());
-        Optional<Command> optionalCommand = commandStream
+        Optional<Command> optionalCommand = Command.getCommandStream()
                 .filter(c -> c.getKeyword().equals(inputKeyword))
                 .findFirst();
-        return optionalCommand.orElseThrow(() -> new IllegalAccessException("Unknown command: " + input));
+        return optionalCommand
+                .orElseThrow(() -> new InvalidCommandException(inputKeyword, "Wuf? I don't recognize this"));
     }
 }
