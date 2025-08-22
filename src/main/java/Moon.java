@@ -57,17 +57,23 @@ public class Moon {
         System.out.println("\t____________________________________________________________");
     }
 
-    public void setTaskDone(String input, boolean isDone) {
-        int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-        Task taskToSet = taskList.get(taskIndex);
-        if (isDone) {
-            taskToSet.setDone();
-            System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
-                    taskToSet);
-        } else{
-            taskToSet.setNotDone();
-            System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
-                    taskToSet);
+    public void setTaskDone(String input, boolean isDone) throws InvalidIndexException {
+        try {
+            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+            Task taskToSet = taskList.get(taskIndex);
+            if (isDone) {
+                taskToSet.setDone();
+                System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
+                        taskToSet);
+            } else {
+                taskToSet.setNotDone();
+                System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
+                        taskToSet);
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException("Wuf! I can't recognize your index. Are you sure it's an integer?");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException("Wuf! Your index is out of range!");
         }
     }
 
