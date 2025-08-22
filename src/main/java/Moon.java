@@ -1,14 +1,15 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 // OT: The chatbot is named Moon after my pet puppy, that's why there's a puppy in the logo.
 public class Moon {
 
-    private final Task[] taskList;  // list of task
+    private final ArrayList<Task> taskList;  // list of task
     private int listIndex;  // list index
 
     // Constructor for class Moon
     public Moon() {
-        this.taskList = new Task[100];
+        this.taskList = new ArrayList<>();
         this.listIndex = 0;
     }
 
@@ -27,7 +28,7 @@ public class Moon {
 
     // display goodbye message when exit the bot
     public void getExitMessage() {
-        System.out.println("\tMoon: Byeee! Hope to see you again! A-woooooooooooo! 🐾\n");
+        System.out.println("\tMoon: Byeee! Hope to see you again! A-woooooooooooo! 🐾");
     }
 
     // display prompting message when the chatbot wants to ask
@@ -39,14 +40,14 @@ public class Moon {
     public void getTaskList() {
         System.out.println("\tMoon: Here are the items in your list!");
         for (int i = 0; i < listIndex; i++) {
-            System.out.printf("\t\t  %d. %s\n", i + 1, taskList[i]);
+            System.out.printf("\t\t  %d. %s\n", i + 1, taskList.get(i));
         }
-        System.out.println("\t\t  Woof!\n");
+        System.out.println("\t\t  Woof!");
     }
 
     // add task into the list
     public void addTask(Task task) {
-        taskList[listIndex] = task;
+        taskList.add(task);
         listIndex += 1;
         System.out.printf("\tMoon: Copy that! I've added this task!\n\t\t\t%s\n", task);
     }
@@ -58,14 +59,15 @@ public class Moon {
 
     public void setTaskDone(String input, boolean isDone) {
         int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+        Task taskToSet = taskList.get(taskIndex);
         if (isDone) {
-            taskList[taskIndex].setDone();
+            taskToSet.setDone();
             System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
-                    taskList[taskIndex]);
+                    taskToSet);
         } else{
-            taskList[taskIndex].setNotDone();
+            taskToSet.setNotDone();
             System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
-                    taskList[taskIndex]);
+                    taskToSet);
         }
     }
 

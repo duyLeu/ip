@@ -5,6 +5,6 @@ public class MoonException extends Exception {
 
     @Override
     public String getMessage() {
-        return "\t" + super.getMessage();
+        return "\tMoon: " + super.getMessage();
     }
 }
