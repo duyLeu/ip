@@ -1,3 +1,4 @@
+// Exception thrown when the command keyword does not match up to any keyword in the list.
 public class InvalidCommandException extends MoonException {
     private String invalidCommand;
 
@@ -10,10 +11,12 @@ public class InvalidCommandException extends MoonException {
         this.invalidCommand = invalidCommand;
     }
 
+    // Method to find the closest matching command
+    // primitive version: compare the first letter with all first letters in the keyword lists
     private String findSimilarCommand() {
         return Command.getCommandStream()
                 .map(Command::getKeyword)
-                .filter(c -> c.startsWith(this.invalidCommand.substring(0,2)))
+                .filter(c -> c.startsWith(this.invalidCommand.substring(0,1)))
                 .findFirst()
                 .map(c -> String.format("Do you mean '%s'?", c))
                 .orElse("");

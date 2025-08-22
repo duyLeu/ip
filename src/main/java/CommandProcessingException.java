@@ -1,5 +1,6 @@
+// Exception thrown for errors in processing the commands
 public class CommandProcessingException extends MoonException {
-    private Command command;
+    private final Command command;
 
     public CommandProcessingException(Command command, String message) {
         super(message);
