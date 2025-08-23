@@ -56,6 +56,7 @@ public enum Command {
                 .filter(c -> c.getKeyword().equals(inputKeyword))
                 .findFirst();
         return optionalCommand
-                .orElseThrow(() -> new InvalidCommandException(inputKeyword, "Wuf? I don't recognize this"));
+                .orElseThrow(() -> new InvalidCommandException(inputKeyword,
+                        "Wuf? Are you sure you have the correct command?"));
     }
 }

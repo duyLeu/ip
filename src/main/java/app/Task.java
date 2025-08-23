@@ -10,7 +10,7 @@ public class Task {
         this.isDone = false;
     }
 
-    private boolean getDone() {
+    public boolean getDone() {
         return this.isDone;
     }
 

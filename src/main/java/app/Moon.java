@@ -22,7 +22,7 @@ public class Moon {
     public void getGreetingMessage() {
         String logo =
                 """
-                         __  __   ____    ____    _   _\s
+                         __  __   ____    ____    _   _
                         |  \\/  | / __ \\  / __ \\  | \\ | |     __      _
                         | |\\/| || |  | || | () | |  \\| |   o'')}____//
                         | |  | || |__| || @ . o| | |\\  |    `_/      )
@@ -50,11 +50,15 @@ public class Moon {
 
     // display the task list
     public void getTaskList() {
-        System.out.println("\tMoon: Here are the items in your list!");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("\t\t  %d. %s\n", i + 1, taskList.get(i));
+        if (taskList.isEmpty()) {
+            System.out.println("\tMoon: You haven't added anything to your list yet. Time to start tasking! A-wooooo!");
+        } else {
+            System.out.println("\tMoon: Here are the items in your list!");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.printf("\t\t  %d. %s\n", i + 1, taskList.get(i));
+            }
+            System.out.println("\t\t  Woof!");
         }
-        System.out.println("\t\t  Woof!");
     }
 
     // add task into the list
@@ -79,7 +83,7 @@ public class Moon {
 
         } catch (NumberFormatException e) { // exception thrown by parseInt()
             throw new InvalidIndexException(Command.DELETE,
-                    "Wuf! I can't recognize your index. Are you sure it's an integer?");
+                    "Wuf! I don't think you put in an integer?");
         }
     }
 
@@ -94,19 +98,27 @@ public class Moon {
             }
 
             Task taskToSet = taskList.get(taskIndex);
-            if (isDone) {
+
+            if (taskToSet.getDone() == isDone) {
+                // in case task is already marked
+                System.out.printf("\tMoon: I see you have already marked/unmarked this task!\n\t\t\t%s\n",
+                        taskToSet);
+
+            } else if (isDone) {
                 taskToSet.setDone();
                 System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
                         taskToSet);
+
             } else {
                 taskToSet.setNotDone();
                 System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
                         taskToSet);
+
             }
         } catch (NumberFormatException e) { // exception thrown by parseInt()
             Command commandType = isDone ? Command.MARK : Command.UNMARK;
             throw new InvalidIndexException(commandType,
-                    "Wuf! I can't recognize your index. Are you sure it's an integer?");
+                    "Wuf! I don't think you put in an integer?");
         }
     }
 
@@ -114,6 +126,7 @@ public class Moon {
     public int handleInput(String input) {
         try {
             Command command = Command.fromString(input);
+            // switch-case structure for better readability
             switch (command) {
                 case EXIT -> getExitMessage();
                 case LIST -> getTaskList();
@@ -131,6 +144,7 @@ public class Moon {
             return -1;
 
         } catch (RuntimeException e) { // in case of unexpected behaviour, the program will not crash
+            System.out.println(e);
             System.out.println("\tMoon: Wuf? I don't understand that, can you try again?");
             return -1;
         }

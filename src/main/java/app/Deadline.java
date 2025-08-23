@@ -20,22 +20,26 @@ public class Deadline extends Task {
     public static Deadline fromString(String input) throws ParseException, EmptyArgumentException {
         // split the string by the " /" separator into, supposedly, two parts: description, and deadline
         String[] inputList = input.split(" /");
-        if (inputList.length != 2) {
+        if (inputList.length < 2) {
             throw new ParseException(input, Command.DEADLINE,
-                    "Wuf! are you missing a dash '/' somewhere?");
+                    "Wuf! Are you missing a dash '/' or a command somewhere?");
+        } else if (inputList.length > 2) {
+            throw new ParseException(input, Command.DEADLINE,
+                    "Wuf! Are you sure you have the correct command?");
         }
 
+        if (inputList[0].split(" ").length <= 1) {
+            throw new EmptyArgumentException(Command.DEADLINE,
+                    "Wuf! Your task name cannot be empty!");
+
+        }
         String deadlineName = inputList[0].substring(9);
 
         String byKeyword = inputList[1].split(" ")[0];
-        // check keyword 'by' exist, and empty arguments
+        // check keyword 'by' exist, and empty deadline time argument
         if (!byKeyword.equals("by")) {
             throw new ParseException(byKeyword, Command.DEADLINE,
                     String.format("Wuf! I think you make a mistake here: '%s'", byKeyword));
-
-        } else if (inputList[0].split(" ").length <= 1) {
-            throw new EmptyArgumentException(Command.DEADLINE,
-                    "Wuf! Your task name cannot be empty!");
 
         } else if (inputList[1].split(" ").length <= 1) {
             throw new EmptyArgumentException(Command.DEADLINE,
