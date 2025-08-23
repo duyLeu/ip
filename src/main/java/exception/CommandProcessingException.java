@@ -1,3 +1,7 @@
+package exception;
+
+import app.Command;
+
 // Exception thrown for errors in processing the commands
 public class CommandProcessingException extends MoonException {
     private final Command command;

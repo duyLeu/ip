@@ -1,3 +1,5 @@
+package app;
+
 // General task class representing any type of task.
 public class Task {
     private final String name;

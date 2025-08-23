@@ -1,5 +1,10 @@
+package app;
+
+import exception.EmptyArgumentException;
+import exception.ParseException;
+
 // Event class represents the 'Event' type of tasks, with a description and start-end times
-public class Event extends Task{
+public class Event extends Task {
     private String fromTime;
     private String toTime;
 

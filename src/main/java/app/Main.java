@@ -1,3 +1,5 @@
+package app;
+
 // Class to start running the chatbot
 public class Main {
     public static void main(String[] args) {

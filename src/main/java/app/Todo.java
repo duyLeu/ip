@@ -1,3 +1,7 @@
+package app;
+
+import exception.EmptyArgumentException;
+
 // To-do class represents the 'Todos' type of tasks, with a description
 public class Todo extends Task {
     public Todo(String name) {

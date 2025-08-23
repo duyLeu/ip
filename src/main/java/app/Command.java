@@ -1,6 +1,9 @@
+package app;
+
 import java.util.Arrays;
 import java.util.stream.*;
 import java.util.Optional;
+import exception.InvalidCommandException;
 
 // Command enum containing all the
 public enum Command {
