@@ -9,7 +9,7 @@ import util.InputChecker;
 public class Event extends Task {
     private final String fromTime;
     private final String toTime;
-    private static final Command command = Command.EVENT;
+    private static final Command COMMAND = Command.EVENT;
 
     public Event(String name, String fromTime, String toTime) {
         super(name);
@@ -30,17 +30,17 @@ public class Event extends Task {
         // split the string by the " /" separator into, supposedly, three parts: description, start time, end time
         String[] inputList = input.split(" /");
 
-        InputChecker.checkCommandFormat(inputList, command);
-        InputChecker.checkEmptyParameter(inputList[0], command, true);
+        InputChecker.checkCommandFormat(inputList, COMMAND);
+        InputChecker.checkEmptyParameter(inputList[0], COMMAND, true);
 
         String eventName = inputList[0].substring(6);
         String fromKeyword = inputList[1].split(" ")[0];
         String toKeyword = inputList[2].split(" ")[0];
 
-        InputChecker.checkKeyword(fromKeyword, "from", command);
-        InputChecker.checkKeyword(toKeyword, "to", command);
-        InputChecker.checkEmptyParameter(fromKeyword, command, false);
-        InputChecker.checkEmptyParameter(toKeyword, command, false);
+        InputChecker.checkKeyword(fromKeyword, "from", COMMAND);
+        InputChecker.checkKeyword(toKeyword, "to", COMMAND);
+        InputChecker.checkEmptyParameter(fromKeyword, COMMAND, false);
+        InputChecker.checkEmptyParameter(toKeyword, COMMAND, false);
 
         // extract the start-end times from the strings and return an Event object
         String fromTime = inputList[1].substring(5);

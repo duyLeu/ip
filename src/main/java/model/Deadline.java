@@ -8,7 +8,7 @@ import util.InputChecker;
 // Deadline class represents the 'Deadline' type of tasks, with a description and a deadline
 public class Deadline extends Task {
     private final String byTime;
-    private static final Command command = Command.DEADLINE;
+    private static final Command COMMAND = Command.DEADLINE;
 
     public Deadline(String name, String deadline) {
         super(name);
@@ -24,14 +24,14 @@ public class Deadline extends Task {
         // split the string by the " /" separator into, supposedly, two parts: description, and deadline
         String[] inputList = input.split(" /");
 
-        InputChecker.checkCommandFormat(inputList, command);
-        InputChecker.checkEmptyParameter(inputList[0], command, true);
+        InputChecker.checkCommandFormat(inputList, COMMAND);
+        InputChecker.checkEmptyParameter(inputList[0], COMMAND, true);
 
         String deadlineName = inputList[0].substring(9);
         String byKeyword = inputList[1].split(" ")[0];
 
-        InputChecker.checkKeyword(byKeyword, "by", command);
-        InputChecker.checkEmptyParameter(byKeyword, command, false);
+        InputChecker.checkKeyword(byKeyword, "by", COMMAND);
+        InputChecker.checkEmptyParameter(byKeyword, COMMAND, false);
 
         String deadlineTime = inputList[1].substring(3);
         return new Deadline(deadlineName, deadlineTime);
