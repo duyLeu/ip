@@ -1,4 +1,4 @@
-package app;
+package logic;
 
 // Class to start running the chatbot
 public class Main {

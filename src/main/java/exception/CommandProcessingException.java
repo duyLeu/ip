@@ -1,6 +1,6 @@
 package exception;
 
-import app.Command;
+import model.Command;
 
 // Exception thrown for errors in processing the commands
 public class CommandProcessingException extends MoonException {

@@ -1,9 +1,13 @@
-package app;
+package logic;
 
 import exception.InvalidIndexException;
 import exception.MoonException;
-import java.util.Scanner;
+
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import model.*;
+
 
 // Moon contains all core features of the chatbot
 // OT: The chatbot is named Moon after my pet puppy, that's why there's a puppy in the logo.
