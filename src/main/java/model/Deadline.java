@@ -3,9 +3,12 @@ package model;
 import exception.EmptyArgumentException;
 import exception.ParseException;
 
+import util.InputChecker;
+
 // Deadline class represents the 'Deadline' type of tasks, with a description and a deadline
 public class Deadline extends Task {
-    private String byTime;
+    private final String byTime;
+    private static final Command command = Command.DEADLINE;
 
     public Deadline(String name, String deadline) {
         super(name);
@@ -20,32 +23,16 @@ public class Deadline extends Task {
     public static Deadline fromString(String input) throws ParseException, EmptyArgumentException {
         // split the string by the " /" separator into, supposedly, two parts: description, and deadline
         String[] inputList = input.split(" /");
-        if (inputList.length < 2) {
-            throw new ParseException(input, Command.DEADLINE,
-                    "Wuf! Are you missing a dash '/' or a command somewhere?");
-        } else if (inputList.length > 2) {
-            throw new ParseException(input, Command.DEADLINE,
-                    "Wuf! Are you sure you have the correct command?");
-        }
 
-        if (inputList[0].split(" ").length <= 1) {
-            throw new EmptyArgumentException(Command.DEADLINE,
-                    "Wuf! Your task name cannot be empty!");
+        InputChecker.checkCommandFormat(inputList, command);
+        InputChecker.checkEmptyParameter(inputList[0], command, true);
 
-        }
         String deadlineName = inputList[0].substring(9);
-
         String byKeyword = inputList[1].split(" ")[0];
-        // check keyword 'by' exist, and empty deadline time argument
-        if (!byKeyword.equals("by")) {
-            throw new ParseException(byKeyword, Command.DEADLINE,
-                    String.format("Wuf! I think you make a mistake here: '%s'", byKeyword));
 
-        } else if (inputList[1].split(" ").length <= 1) {
-            throw new EmptyArgumentException(Command.DEADLINE,
-                    "Wuf! Your deadline time cannot be empty!");
-        }
-        // extract the start-end times from the strings and return an Event object
+        InputChecker.checkKeyword(byKeyword, "by", command);
+        InputChecker.checkEmptyParameter(byKeyword, command, false);
+
         String deadlineTime = inputList[1].substring(3);
         return new Deadline(deadlineName, deadlineTime);
     }
