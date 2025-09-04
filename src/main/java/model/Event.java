@@ -3,15 +3,16 @@ package model;
 import exception.EmptyArgumentException;
 import exception.ParseException;
 
+import util.DateTimeParser;
 import util.InputChecker;
 
 // Event class represents the 'Event' type of tasks, with a description and start-end times
 public class Event extends Task {
-    private final String fromTime;
-    private final String toTime;
+    private final MoonDateTime fromTime;
+    private final MoonDateTime toTime;
     private static final Command COMMAND = Command.EVENT;
 
-    public Event(String name, String fromTime, String toTime) {
+    private Event(String name, MoonDateTime fromTime, MoonDateTime toTime) {
         super(name);
         this.fromTime = fromTime;
         this.toTime = toTime;
@@ -25,7 +26,7 @@ public class Event extends Task {
         InputChecker.checkCommandFormat(inputList, COMMAND);
         InputChecker.checkEmptyParameter(inputList[0], COMMAND, true);
 
-        String eventName = inputList[0].substring(6);
+        String eventName = inputList[0].substring(6).trim();
         String fromKeyword = inputList[1].split(" ")[0];
         String toKeyword = inputList[2].split(" ")[0];
 
@@ -35,8 +36,8 @@ public class Event extends Task {
         InputChecker.checkEmptyParameter(toKeyword, COMMAND, false);
 
         // extract the start-end times from the strings and return an Event object
-        String fromTime = inputList[1].substring(5);
-        String toTime = inputList[2].substring(3);
+        MoonDateTime fromTime = DateTimeParser.parse(inputList[1].substring(5), false);
+        MoonDateTime toTime = DateTimeParser.parse(inputList[2].substring(3), false);
         return new Event(eventName, fromTime, toTime);
     }
 
@@ -44,15 +45,17 @@ public class Event extends Task {
         String[] inputList = input.split(" | ");
         InputChecker.checkCommandFormat(inputList, COMMAND);
 
-        return new Event(inputList[0], inputList[1], inputList[2]);
+        MoonDateTime fromTime = DateTimeParser.parse(inputList[1], true);
+        MoonDateTime toTime = DateTimeParser.parse(inputList[2], true);
+        return new Event(inputList[0], fromTime, toTime);
     }
 
     private String getFromTime() {
-        return this.fromTime;
+        return this.fromTime.toString();
     }
 
     private String getToTime() {
-        return this.toTime;
+        return this.toTime.toString();
     }
 
     @Override

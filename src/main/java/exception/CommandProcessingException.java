@@ -4,7 +4,11 @@ import model.Command;
 
 // Exception thrown for errors in processing the commands
 public class CommandProcessingException extends MoonException {
-    private final Command command;
+    private Command command;
+
+    public CommandProcessingException(String message) {
+        super(message);
+    }
 
     public CommandProcessingException(Command command, String message) {
         super(message);

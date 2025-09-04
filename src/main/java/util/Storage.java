@@ -40,7 +40,7 @@ public class Storage {
         TaskList tasks = new TaskList();
         for (String line : lines) {
             if (!line.isBlank()) {
-                tasks.add(Parser.parseFromStorage(line));
+                tasks.add(InputParser.parseFromStorage(line));
             }
         }
         return tasks;

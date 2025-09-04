@@ -7,6 +7,10 @@ public class ParseException extends CommandProcessingException {
     private String parseError;
     private Command command;
 
+    public ParseException(String message) {
+        super(message);
+    }
+
     public ParseException(Command command, String message) {
         super(command, message);
     }

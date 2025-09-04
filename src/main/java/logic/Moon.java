@@ -4,7 +4,7 @@ import exception.InvalidIndexException;
 import exception.MoonException;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import model.*;
