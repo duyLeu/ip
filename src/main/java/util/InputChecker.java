@@ -8,6 +8,7 @@ import model.Command;
 public class InputChecker {
     public static void checkCommandFormat(String[] inputList, Command command) throws ParseException {
         int numOfParameters = switch (command) {
+            case TODO -> 1;
             case DEADLINE -> 2;
             case EVENT -> 3;
             default -> throw new ParseException(command,

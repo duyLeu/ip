@@ -17,16 +17,8 @@ public class Event extends Task {
         this.toTime = toTime;
     }
 
-    private String getFromTime() {
-        return this.fromTime;
-    }
-
-    private String getToTime() {
-        return this.toTime;
-    }
-
     // function that parse the string input to initialize a new Event object
-    public static Event fromString(String input) throws ParseException, EmptyArgumentException {
+    public static Event parseFromInput(String input) throws ParseException, EmptyArgumentException {
         // split the string by the " /" separator into, supposedly, three parts: description, start time, end time
         String[] inputList = input.split(" /");
 
@@ -46,6 +38,35 @@ public class Event extends Task {
         String fromTime = inputList[1].substring(5);
         String toTime = inputList[2].substring(3);
         return new Event(eventName, fromTime, toTime);
+    }
+
+    public static Event parseFromStorage(String input) throws ParseException {
+        String[] inputList = input.split(" | ");
+        InputChecker.checkCommandFormat(inputList, COMMAND);
+
+        return new Event(inputList[0], inputList[1], inputList[2]);
+    }
+
+    private String getFromTime() {
+        return this.fromTime;
+    }
+
+    private String getToTime() {
+        return this.toTime;
+    }
+
+    @Override
+    public String getType() {
+        return COMMAND.getKeyword();
+    }
+
+    @Override
+    public String toStorage() {
+        return String.join(" | ",
+                "E",
+                this.isDone() ? "1" : "0",
+                this.getFromTime(),
+                this.getToTime());
     }
 
     @Override

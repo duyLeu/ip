@@ -15,12 +15,8 @@ public class Deadline extends Task {
         this.byTime = deadline;
     }
 
-    private String getByTime() {
-        return this.byTime;
-    }
-
     // function that parse the string input to initialize a new Deadline object
-    public static Deadline fromString(String input) throws ParseException, EmptyArgumentException {
+    public static Deadline parseFromInput(String input) throws ParseException, EmptyArgumentException {
         // split the string by the " /" separator into, supposedly, two parts: description, and deadline
         String[] inputList = input.split(" /");
 
@@ -35,6 +31,30 @@ public class Deadline extends Task {
 
         String deadlineTime = inputList[1].substring(3);
         return new Deadline(deadlineName, deadlineTime);
+    }
+
+    public static Deadline parseFromStorage(String input) throws ParseException {
+        String[] inputList = input.split(" | ");
+        InputChecker.checkCommandFormat(inputList, COMMAND);
+
+        return new Deadline(inputList[0], inputList[1]);
+    }
+
+    private String getByTime() {
+        return this.byTime;
+    }
+
+    @Override
+    public String getType() {
+        return COMMAND.getKeyword();
+    }
+
+    @Override
+    public String toStorage() {
+        return String.join(" | ",
+                "D",
+                this.isDone() ? "1" : "0",
+                this.getByTime());
     }
 
     @Override

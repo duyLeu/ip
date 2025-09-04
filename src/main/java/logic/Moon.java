@@ -13,11 +13,11 @@ import model.*;
 // OT: The chatbot is named Moon after my pet puppy, that's why there's a puppy in the logo.
 public class Moon {
 
-    private final ArrayList<Task> taskList;  // list of task, ArrayList is more convenient for add/get/delete items
+    private final TaskList taskList;  // list of task, ArrayList is more convenient for add/get/delete items
 
     // Constructor
     public Moon() {
-        this.taskList = new ArrayList<>();
+        this.taskList = new TaskList();
     }
 
     // ===== Default Messages Methods =====
@@ -57,11 +57,7 @@ public class Moon {
         if (taskList.isEmpty()) {
             System.out.println("\tMoon: You haven't added anything to your list yet. Time to start tasking! A-wooooo!");
         } else {
-            System.out.println("\tMoon: Here are the items in your list!");
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.printf("\t\t  %d. %s\n", i + 1, taskList.get(i));
-            }
-            System.out.println("\t\t  Woof!");
+            System.out.printf("\tMoon: Here are the items in your list!\n%s\t\t  Woof!", this.taskList);
         }
     }
 
@@ -81,7 +77,7 @@ public class Moon {
                         "Wuf! Your index is out of range!");
             }
 
-            Task removedTask = taskList.remove(taskIndex);
+            Task removedTask = taskList.delete(taskIndex);
             System.out.printf("\tMoon: Copy that! I've deleted this task! Woof!\n\t\t\t%s\n",
                     removedTask);
 
@@ -92,7 +88,7 @@ public class Moon {
     }
 
     // mark/unmark the task based on the isDone argument.
-    public void setTaskDone(String input, boolean isDone) throws InvalidIndexException {
+    public void setTaskDone(String input, boolean isSettingDone) throws InvalidIndexException {
         try {
             // the first line splits the input string then check for the *second* element for the list index
             int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -103,12 +99,12 @@ public class Moon {
 
             Task taskToSet = taskList.get(taskIndex);
 
-            if (taskToSet.getDone() == isDone) {
+            if (taskToSet.isDone() == isSettingDone) {
                 // in case task is already marked
                 System.out.printf("\tMoon: I see you have already marked/unmarked this task!\n\t\t\t%s\n",
                         taskToSet);
 
-            } else if (isDone) {
+            } else if (isSettingDone) {
                 taskToSet.setDone();
                 System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
                         taskToSet);
@@ -129,16 +125,16 @@ public class Moon {
     // handle the string input
     public int handleInput(String input) {
         try {
-            Command command = Command.fromString(input);
+            Command command = Command.findMatchingCommand(input);
             // switch-case structure for better readability
             switch (command) {
                 case EXIT -> getExitMessage();
                 case LIST -> getTaskList();
                 case MARK -> setTaskDone(input, true);
                 case UNMARK -> setTaskDone(input, false);
-                case TODO -> addTask(Todo.fromString(input));
-                case DEADLINE -> addTask(Deadline.fromString(input));
-                case EVENT -> addTask(Event.fromString(input));
+                case TODO -> addTask(Todo.parseFromInput(input));
+                case DEADLINE -> addTask(Deadline.parseFromInput(input));
+                case EVENT -> addTask(Event.parseFromInput(input));
                 case DELETE -> deleteTask(input);
             }
             return command.getStatusCode();

@@ -10,7 +10,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public boolean getDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
@@ -22,9 +22,13 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public abstract String getType();
+
+    public abstract String toStorage();
+
     @Override
     public String toString() {
-        return this.getDone()
+        return this.isDone()
                 ? "[X] " + this.name
                 : "[ ] " + this.name;
     }
