@@ -2,17 +2,15 @@ package util;
 
 import exception.InvalidCommandException;
 import exception.ParseException;
-import model.Task;
 import model.TaskList;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +52,8 @@ public class Storage {
         for (int i = 0; i < tasks.size(); i++) {
             lines.add(tasks.get(i).toStorage());
         }
-        Files.write(this.storageFile, lines, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(this.storageFile, lines,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING);
     }
 }
