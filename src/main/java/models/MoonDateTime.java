@@ -1,4 +1,4 @@
-package model;
+package models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,11 +23,11 @@ public class MoonDateTime {
     }
 
 
-    public String getDate() {
+    private String getDate() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    public String getTime() {
+    private String getTime() {
         return this.time.isPresent()
                 ? time.get().format(DateTimeFormatter.ofPattern("HH:mm"))
                 : "";

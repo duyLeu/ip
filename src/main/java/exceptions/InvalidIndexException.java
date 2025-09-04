@@ -1,6 +1,6 @@
-package exception;
+package exceptions;
 
-import model.Command;
+import command.Command;
 
 // Exception thrown when list index either not an integer, or out of range of the list.
 public class InvalidIndexException extends CommandProcessingException {

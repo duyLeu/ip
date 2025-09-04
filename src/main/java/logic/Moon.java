@@ -1,13 +1,13 @@
 package logic;
 
-import exception.InvalidIndexException;
-import exception.MoonException;
+import command.Command;
+import exceptions.MoonException;
 
 import java.io.IOException;
 
 import java.util.Scanner;
 
-import model.*;
+import models.*;
 
 import util.Storage;
 
@@ -59,77 +59,7 @@ public class Moon {
         System.out.println("\t____________________________________________________________");
     }
 
-    // ===== Task Management Methods =====
 
-    // display the task list
-    public void getTaskList() {
-        if (taskList.isEmpty()) {
-            System.out.println("\tMoon: You haven't added anything to your list yet. Time to start tasking! A-wooooo!");
-        } else {
-            System.out.printf("\tMoon: Here are the items in your list!\n%s\t\t  Woof!", this.taskList);
-        }
-    }
-
-    // add task into the list
-    public void addTask(Task task) {
-        taskList.add(task);
-        System.out.printf("\tMoon: Copy that! I've added this task!\n\t\t\t%s\n", task);
-    }
-
-    // delete task
-    public void deleteTask(String input) throws InvalidIndexException {
-        try {
-            // the first line splits the input string then check for the *second* element for the list index
-            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            if (taskIndex < 0 || taskIndex >= taskList.size()) { // check for index range
-                throw new InvalidIndexException(Command.DELETE,
-                        "Wuf! Your index is out of range!");
-            }
-
-            Task removedTask = taskList.delete(taskIndex);
-            System.out.printf("\tMoon: Copy that! I've deleted this task! Woof!\n\t\t\t%s\n",
-                    removedTask);
-
-        } catch (NumberFormatException e) { // exception thrown by parseInt()
-            throw new InvalidIndexException(Command.DELETE,
-                    "Wuf! I don't think you put in an integer?");
-        }
-    }
-
-    // mark/unmark the task based on the isDone argument.
-    public void setTaskDone(String input, boolean setDone) throws InvalidIndexException {
-        try {
-            // the first line splits the input string then check for the *second* element for the list index
-            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            if (taskIndex < 0 || taskIndex >= taskList.size()) { // check for index range
-                throw new InvalidIndexException(Command.DELETE,
-                        "Wuf! Your index is out of range!");
-            }
-
-            Task taskToSet = taskList.get(taskIndex);
-
-            if (taskToSet.isDone() == setDone) {
-                // in case task is already marked
-                System.out.printf("\tMoon: I see you have already marked/unmarked this task!\n\t\t\t%s\n",
-                        taskToSet);
-
-            } else if (setDone) {
-                taskToSet.setDone();
-                System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
-                        taskToSet);
-
-            } else {
-                taskToSet.setNotDone();
-                System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
-                        taskToSet);
-
-            }
-        } catch (NumberFormatException e) { // exception thrown by parseInt()
-            Command commandType = setDone ? Command.MARK : Command.UNMARK;
-            throw new InvalidIndexException(commandType,
-                    "Wuf! I don't think you put in an integer?");
-        }
-    }
 
     // handle the string input
     public int handleInput(String input) {

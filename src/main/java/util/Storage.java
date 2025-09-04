@@ -1,8 +1,8 @@
 package util;
 
-import exception.InvalidCommandException;
-import exception.ParseException;
-import model.TaskList;
+import exceptions.InvalidCommandException;
+import exceptions.ParseException;
+import models.TaskList;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

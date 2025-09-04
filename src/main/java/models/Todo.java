@@ -1,7 +1,8 @@
-package model;
+package models;
 
-import exception.EmptyArgumentException;
-import exception.ParseException;
+import command.Command;
+import exceptions.EmptyArgumentException;
+import exceptions.ParseException;
 import util.InputChecker;
 
 // To-do class represents the 'Todos' type of tasks, with a description

@@ -1,4 +1,4 @@
-package model;
+package models;
 
 // General task class representing any type of task.
 public abstract class Task {

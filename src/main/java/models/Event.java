@@ -1,7 +1,8 @@
-package model;
+package models;
 
-import exception.EmptyArgumentException;
-import exception.ParseException;
+import command.Command;
+import exceptions.EmptyArgumentException;
+import exceptions.ParseException;
 
 import util.DateTimeParser;
 import util.InputChecker;

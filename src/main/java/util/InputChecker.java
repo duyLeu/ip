@@ -1,9 +1,9 @@
 package util;
 
-import exception.EmptyArgumentException;
-import exception.ParseException;
+import exceptions.EmptyArgumentException;
+import exceptions.ParseException;
 
-import model.Command;
+import command.Command;
 
 public class InputChecker {
     public static void checkCommandFormat(String[] inputList, Command command) throws ParseException {

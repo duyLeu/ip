@@ -1,9 +1,8 @@
-package model;
+package command;
 
-import exception.InvalidCommandException;
+import exceptions.InvalidCommandException;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.stream.*;
 
 // Command enum containing all the

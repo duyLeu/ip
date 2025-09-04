@@ -1,9 +1,9 @@
 package util;
 
-import exception.InvalidCommandException;
-import exception.ParseException;
+import exceptions.InvalidCommandException;
+import exceptions.ParseException;
 
-import model.*;
+import models.*;
 
 public class InputParser {
     public static Task parseFromStorage(String input) throws ParseException, InvalidCommandException {

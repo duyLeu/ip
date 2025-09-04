@@ -1,6 +1,6 @@
-package exception;
+package exceptions;
 
-import model.Command;
+import command.Command;
 
 // Exception thrown when the command keyword does not match up to any keyword in the list.
 public class InvalidCommandException extends MoonException {
