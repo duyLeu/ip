@@ -1,9 +1,10 @@
-package app;
+package model;
+
+import exception.InvalidCommandException;
 
 import java.util.Arrays;
-import java.util.stream.*;
 import java.util.Optional;
-import exception.InvalidCommandException;
+import java.util.stream.*;
 
 // Command enum containing all the
 public enum Command {
@@ -48,7 +49,7 @@ public enum Command {
         return Arrays.stream(Command.values());
     }
 
-    public static Command fromString(String input) throws InvalidCommandException {
+    public static Command findMatchingCommand(String input) throws InvalidCommandException {
         String inputKeyword = input.split(" ")[0];
         // Use stream and optional for cleaner code and more functionalities (i.e. filter, findFirst)
         Optional<Command> optionalCommand = Command.getCommandStream()

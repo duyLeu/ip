@@ -1,7 +1,7 @@
-package app;
+package model;
 
 // General task class representing any type of task.
-public class Task {
+public abstract class Task {
     private final String name;
     private boolean isDone;
 
@@ -10,7 +10,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public boolean getDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
@@ -22,9 +22,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public abstract String getType();
+
+    public abstract String toStorage();
+
     @Override
     public String toString() {
-        return this.getDone()
+        return this.isDone()
                 ? "[X] " + this.name
                 : "[ ] " + this.name;
     }

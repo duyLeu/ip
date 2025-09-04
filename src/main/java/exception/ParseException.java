@@ -1,6 +1,6 @@
 package exception;
 
-import app.Command;
+import model.Command;
 
 // Exception thrown when there is a parsing error (i.e. missing dash, typo in 'secondary' keywords,...)
 public class ParseException extends CommandProcessingException {

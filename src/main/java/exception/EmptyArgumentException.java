@@ -1,6 +1,6 @@
 package exception;
 
-import app.Command;
+import model.Command;
 
 // Exception thrown when arguments for commands are empty.
 public class EmptyArgumentException extends CommandProcessingException {
