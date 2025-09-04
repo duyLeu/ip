@@ -16,7 +16,7 @@ public class Todo extends Task {
     public static Todo parseFromInput(String input) throws ParseException, EmptyArgumentException {
         InputChecker.checkEmptyParameter(input, COMMAND, false);
 
-        String todoName = input.substring(5);
+        String todoName = input.substring(5).trim();
         return new Todo(todoName);
     }
 

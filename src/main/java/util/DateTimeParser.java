@@ -9,31 +9,37 @@ import java.time.format.DateTimeParseException;
 
 import java.util.Optional;
 
+import exception.ParseException;
 import model.MoonDateTime;
 
 public class DateTimeParser {
     private static final DateTimeFormatter DATE     = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter DATETIME = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter MOONDATE     = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private static final DateTimeFormatter MOONDATETIME = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
-    public static MoonDateTime parse(String input) throws MoonException {
-        return tryParseDateTime(input)
+
+    public static MoonDateTime parse(String input, boolean isFromStorage) throws ParseException {
+        return tryParseDateTime(input, isFromStorage)
                 .map(dt -> MoonDateTime.of(dt.toLocalDate(), dt.toLocalTime()))
-                .or(() -> tryParseDate(input).map(MoonDateTime::ofDate))
-                .orElseThrow(() -> new MoonException("Could not parse date/time: " + input));
+                .or(() -> tryParseDate(input, isFromStorage).map(MoonDateTime::ofDate))
+                .orElseThrow(() -> new ParseException("Could not parse date/time: " + input));
     }
 
-    public static Optional<LocalDateTime> tryParseDateTime(String s) {
+    private static Optional<LocalDateTime> tryParseDateTime(String s, boolean isFromStorage) {
+        DateTimeFormatter format = isFromStorage ? MOONDATETIME : DATETIME;
         try {
-            LocalDateTime dt = LocalDateTime.parse(s, DATETIME);
+            LocalDateTime dt = LocalDateTime.parse(s, format);
             return Optional.of(dt);
         } catch (DateTimeParseException e) {
             return Optional.empty();
         }
     }
 
-    public static Optional<LocalDate> tryParseDate(String s) {
+    private static Optional<LocalDate> tryParseDate(String s, boolean isFromStorage) {
+        DateTimeFormatter format = isFromStorage ? MOONDATE : DATE;
         try {
-            LocalDate d = LocalDate.parse(s, DATE);
+            LocalDate d = LocalDate.parse(s, format);
             return Optional.of(d);
         } catch (DateTimeParseException e) {
             return Optional.empty();

@@ -1,7 +1,5 @@
 package model;
 
-import logic.Moon;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -37,6 +35,6 @@ public class MoonDateTime {
 
     @Override
     public String toString() {
-        return this.getDate() + ", " + this.getTime();
+        return this.getDate() + " " + this.getTime();
     }
 }

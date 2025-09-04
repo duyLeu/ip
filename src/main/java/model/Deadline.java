@@ -3,16 +3,17 @@ package model;
 import exception.EmptyArgumentException;
 import exception.ParseException;
 
+import util.DateTimeParser;
 import util.InputChecker;
 
 // Deadline class represents the 'Deadline' type of tasks, with a description and a deadline
 public class Deadline extends Task {
-    private final String byTime;
+    private final MoonDateTime deadline;
     private static final Command COMMAND = Command.DEADLINE;
 
-    public Deadline(String name, String deadline) {
+    private Deadline(String name, MoonDateTime deadline) {
         super(name);
-        this.byTime = deadline;
+        this.deadline = deadline;
     }
 
     // function that parse the string input to initialize a new Deadline object
@@ -23,25 +24,26 @@ public class Deadline extends Task {
         InputChecker.checkCommandFormat(inputList, COMMAND);
         InputChecker.checkEmptyParameter(inputList[0], COMMAND, true);
 
-        String deadlineName = inputList[0].substring(9);
+        String deadlineName = inputList[0].substring(9).trim();
         String byKeyword = inputList[1].split(" ")[0];
 
         InputChecker.checkKeyword(byKeyword, "by", COMMAND);
         InputChecker.checkEmptyParameter(byKeyword, COMMAND, false);
 
-        String deadlineTime = inputList[1].substring(3);
-        return new Deadline(deadlineName, deadlineTime);
+        MoonDateTime deadline = DateTimeParser.parse(inputList[1].substring(3), false);
+        return new Deadline(deadlineName, deadline);
     }
 
     public static Deadline parseFromStorage(String input) throws ParseException {
         String[] inputList = input.split(" | ");
         InputChecker.checkCommandFormat(inputList, COMMAND);
 
-        return new Deadline(inputList[0], inputList[1]);
+        MoonDateTime deadline = DateTimeParser.parse(inputList[1], true);
+        return new Deadline(inputList[0], deadline);
     }
 
     private String getByTime() {
-        return this.byTime;
+        return this.deadline.toString();
     }
 
     @Override
