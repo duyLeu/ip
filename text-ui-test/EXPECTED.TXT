@@ -6,7 +6,7 @@
 	Moon: Woof woof! I'm Moon! Your personal assistant! 🐾
 	Moon: How may I help you?
 	____________________________________________________________
-	Moon: Wuf? Are you sure you have the correct command?: 'lst'. Do you mean 'list'?
+	Moon: Wuf? Are you sure you have the correct commands?: 'lst'. Do you mean 'list'?
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
@@ -14,7 +14,7 @@
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
-	Moon: Wuf? Are you sure you have the correct command?: 'todone'. Do you mean 'todo'?
+	Moon: Wuf? Are you sure you have the correct commands?: 'todone'. Do you mean 'todo'?
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
@@ -27,7 +27,7 @@
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
-	Moon: Wuf? Are you sure you have the correct command?: 'dead'. Do you mean 'deadline'?
+	Moon: Wuf? Are you sure you have the correct commands?: 'dead'. Do you mean 'deadline'?
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
@@ -35,7 +35,7 @@
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
-	Moon: Wuf! Are you missing a dash '/' or a command somewhere?. You should follow this syntax: 'deadline {task description} /by {deadline time}'.
+	Moon: Wuf! Are you missing a dash '/' or a commands somewhere?. You should follow this syntax: 'deadline {task description} /by {deadline time}'.
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
@@ -52,11 +52,11 @@
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
-	Moon: Wuf? Are you sure you have the correct command?: 'evernt'. Do you mean 'event'?
+	Moon: Wuf? Are you sure you have the correct commands?: 'evernt'. Do you mean 'event'?
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
-	Moon: Wuf! Are you missing a dash '/' or a command somewhere?. You should follow this syntax: 'event {task description} /from {start time} /by {end time}'.
+	Moon: Wuf! Are you missing a dash '/' or a commands somewhere?. You should follow this syntax: 'event {task description} /from {start time} /by {end time}'.
 	____________________________________________________________
 	Moon: How may I help you?
 	____________________________________________________________
