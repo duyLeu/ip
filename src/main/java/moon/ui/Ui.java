@@ -53,7 +53,7 @@ public class Ui {
     }
 
     public void showLoadStorageSuccessfulMessage(TaskList list) {
-        System.out.printf("\tMoon: I have retrieved your previous task list!\\n%s\\t\\t  Woof!", list);
+        System.out.printf("\tMoon: I have retrieved your previous task list!\n%s\t\t  Woof!", list);
     }
 
     public void showLoadStorageUnsuccessfulMessage() {
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     public void showListMessage(TaskList list) {
-        System.out.printf("\tMoon: Here are the items in your list!\n%s\t\t  Woof!", list);
+        System.out.printf("\tMoon: Here are the items in your list!\n%s\t\t  Woof!\n", list);
     }
 
     public void showAlreadyMarkedMessage(Task alreadyMarkedTask) {

@@ -4,5 +4,5 @@ import moon.models.Task;
 import moon.parser.exceptions.ParseException;
 
 public interface StorageParser<T extends Task> {
-    T parse(String input) throws ParseException;
+    T parse(String[] inputs) throws ParseException;
 }

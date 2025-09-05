@@ -10,7 +10,8 @@ public class Todo extends Task {
     public String toStorageString() {
         return String.join(" | ",
                 "T",
-                this.isDone() ? "1" : "0");
+                this.isDone() ? "1" : "0",
+                getName());
     }
 
     @Override

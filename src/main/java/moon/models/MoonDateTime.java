@@ -29,12 +29,12 @@ public class MoonDateTime {
 
     private String getTime() {
         return this.time
-                .map(t -> t.format(DateTimeFormatter.ofPattern("HH:mm")))
+                .map(t -> " " + t.format(DateTimeFormatter.ofPattern("HH:mm")))
                 .orElse("");
     }
 
     @Override
     public String toString() {
-        return this.getDate() + " " + this.getTime();
+        return this.getDate() + this.getTime();
     }
 }

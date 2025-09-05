@@ -6,10 +6,13 @@ import moon.models.Event;
 import moon.models.MoonDateTime;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.DateTimeParser;
+import moon.parser.util.ExtractString;
 import moon.parser.util.FormatChecker;
 
 public class AddEventCommandParser implements CommandParser<AddEventCommand> {
-    public static final Command COMMAND = Command.EVENT;
+    private static final Command COMMAND = Command.EVENT;
+    private static final String PREFIX_FROM = "from";
+    private static final String PREFIX_TO   = "to";
 
     @Override
     public AddEventCommand parse(String input) throws ParseException {
@@ -19,18 +22,22 @@ public class AddEventCommandParser implements CommandParser<AddEventCommand> {
         FormatChecker.checkCommandFormat(inputList, COMMAND);
         FormatChecker.checkEmptyParameter(inputList[0], COMMAND, true);
 
-        String eventName = inputList[0].substring(6).trim();
-        String fromKeyword = inputList[1].split(" ")[0];
-        String toKeyword = inputList[2].split(" ")[0];
+        String eventName = ExtractString.extract(inputList[0], COMMAND.getKeyword());
+        String fromKeyword = inputList[1].split("\\s+")[0];
+        String toKeyword = inputList[2].split("\\s+")[0];
 
-        FormatChecker.checkKeyword(fromKeyword, "from", COMMAND);
-        FormatChecker.checkKeyword(toKeyword, "to", COMMAND);
-        FormatChecker.checkEmptyParameter(fromKeyword, COMMAND, false);
-        FormatChecker.checkEmptyParameter(toKeyword, COMMAND, false);
+        FormatChecker.checkKeyword(fromKeyword, PREFIX_FROM, COMMAND);
+        FormatChecker.checkKeyword(toKeyword, PREFIX_TO, COMMAND);
+        FormatChecker.checkEmptyParameter(inputList[1], COMMAND, false);
+        FormatChecker.checkEmptyParameter(inputList[2], COMMAND, false);
 
         // extract the start-end times from the strings and return an Event object
-        MoonDateTime fromTime = DateTimeParser.parse(inputList[1].substring(5), false);
-        MoonDateTime toTime = DateTimeParser.parse(inputList[2].substring(3), false);
+        MoonDateTime fromTime = DateTimeParser.parse(
+                ExtractString.extract(inputList[1], PREFIX_FROM),
+                false);
+        MoonDateTime toTime = DateTimeParser.parse(
+                ExtractString.extract(inputList[2], PREFIX_TO),
+                false);
         Event newEvent = new Event(eventName, fromTime, toTime);
         return new AddEventCommand(newEvent);
     }

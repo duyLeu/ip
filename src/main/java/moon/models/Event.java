@@ -24,6 +24,7 @@ public class Event extends Task {
         return String.join(" | ",
                 "E",
                 this.isDone() ? "1" : "0",
+                getName(),
                 this.getFromTime(),
                 this.getToTime());
     }

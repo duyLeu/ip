@@ -5,11 +5,7 @@ import moon.parser.exceptions.ParseException;
 
 // Exception thrown when the command keyword does not match up to any keyword in the list.
 public class InvalidCommandException extends ParseException {
-    private String invalidCommand;
-
-    public InvalidCommandException(String message) {
-        super(message);
-    }
+    private final String invalidCommand;
 
     public InvalidCommandException(String invalidCommand, String message) {
         super(message);

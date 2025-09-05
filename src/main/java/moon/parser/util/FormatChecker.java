@@ -38,6 +38,7 @@ public class FormatChecker {
                 };
 
         if (inputString.split(" ").length <= 1) {
+            System.out.println(inputString);
             throw new EmptyArgumentException(command,
                     exceptionMessage);
         }

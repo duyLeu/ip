@@ -1,18 +1,18 @@
 package moon.parser.storage;
 
-import moon.commands.enums.Command;
 import moon.models.Deadline;
 import moon.models.MoonDateTime;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.DateTimeParser;
-import moon.parser.util.FormatChecker;
 
 public class DeadlineStorageParser implements StorageParser<Deadline> {
-    public Deadline parse(String input) throws ParseException {
-        String[] inputList = input.split(" | ");
-        FormatChecker.checkCommandFormat(inputList, Command.DEADLINE);
+    public Deadline parse(String[] inputs) throws ParseException {
+        String name = inputs[2];
+        boolean done = inputs[1].equals("1");
+        MoonDateTime byTime = DateTimeParser.parse(inputs[3], true);
 
-        MoonDateTime deadline = DateTimeParser.parse(inputList[1], true);
-        return new Deadline(inputList[0], deadline);
+        Deadline deadline = new Deadline(name, byTime);
+        deadline.setDone(done);
+        return deadline;
     }
 }

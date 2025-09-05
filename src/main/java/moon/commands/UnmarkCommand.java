@@ -20,7 +20,7 @@ public class UnmarkCommand extends BaseCommand {
         if (!taskToUnmark.isDone()) {
             getUi().showAlreadyUnmarkedMessage(taskToUnmark);
         } else {
-            taskToUnmark.setNotDone();
+            taskToUnmark.setDone(false);
             getUi().showUnmarkedSuccessfulMessage(taskToUnmark);
         }
         return COMMAND.getStatusCode();

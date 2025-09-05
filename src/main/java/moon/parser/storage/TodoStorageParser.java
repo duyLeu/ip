@@ -1,15 +1,15 @@
 package moon.parser.storage;
 
-import moon.commands.enums.Command;
 import moon.models.Todo;
 import moon.parser.exceptions.ParseException;
-import moon.parser.util.FormatChecker;
 
 public class TodoStorageParser implements StorageParser<Todo> {
-    public Todo parse(String input) throws ParseException {
-        String[] inputList = input.split(" | ");
-        FormatChecker.checkCommandFormat(inputList, Command.TODO);
+    public Todo parse(String[] inputs) throws ParseException {
+        String name = inputs[2];
+        boolean done = inputs[1].equals("1");
 
-        return new Todo(inputList[0]);
+        Todo todo = new Todo(name);
+        todo.setDone(done);
+        return todo;
     }
 }

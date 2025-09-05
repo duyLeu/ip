@@ -10,16 +10,16 @@ public abstract class Task {
         this.done = false;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public boolean isDone() {
         return this.done;
     }
 
-    public void setDone() {
-        this.done = true;
-    }
-
-    public void setNotDone() {
-        this.done = false;
+    public void setDone(boolean b) {
+        this.done = b;
     }
 
     public abstract String toStorageString();

@@ -30,6 +30,7 @@ public class UserInputParser {
                 .parallel()
                 .filter(c -> c.getKeyword().equals(inputKeyword))
                 .findFirst()
-                .orElseThrow(() -> new InvalidCommandException(inputKeyword));
+                .orElseThrow(() -> new InvalidCommandException(inputKeyword,
+                        "I couldn't find any matching command, woof!"));
     }
 }

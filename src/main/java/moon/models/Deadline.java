@@ -18,6 +18,7 @@ public class Deadline extends Task {
         return String.join(" | ",
                 "D",
                 this.isDone() ? "1" : "0",
+                getName(),
                 this.getByTime());
     }
 

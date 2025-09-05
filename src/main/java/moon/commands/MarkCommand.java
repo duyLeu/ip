@@ -20,7 +20,7 @@ public class MarkCommand extends BaseCommand {
         if (taskToMark.isDone()) {
             getUi().showAlreadyMarkedMessage(taskToMark);
         } else {
-            taskToMark.setDone();
+            taskToMark.setDone(true);
             getUi().showMarkedSuccessfulMessage(taskToMark);
         }
         return COMMAND.getStatusCode();

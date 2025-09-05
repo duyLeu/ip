@@ -8,7 +8,7 @@ public class DeleteCommandParser implements CommandParser<DeleteCommand> {
     public DeleteCommand parse(String input) throws InvalidIndexException {
         // the first line splits the input string then check for the *second* element for the list index
         try {
-            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+            int taskIndex = Integer.parseInt(input.split("\\s+")[1]) - 1;
             return new DeleteCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new InvalidIndexException(Command.DELETE,
