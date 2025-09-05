@@ -12,7 +12,7 @@ public class Deadline extends Task {
     private final MoonDateTime deadline;
     private static final Command COMMAND = Command.DEADLINE;
 
-    private Deadline(String name, MoonDateTime deadline) {
+    public Deadline(String name, MoonDateTime deadline) {
         super(name);
         this.deadline = deadline;
     }

@@ -4,9 +4,9 @@ import models.Task;
 import models.TaskList;
 import ui.Ui;
 
-public class MarkCommand extends BaseCommand {
+public class UnmarkCommand extends BaseCommand {
 
-    public MarkCommand(String s) {
+    public UnmarkCommand(String s) {
         super(s);
     }
 

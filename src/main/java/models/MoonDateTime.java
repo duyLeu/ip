@@ -28,9 +28,9 @@ public class MoonDateTime {
     }
 
     private String getTime() {
-        return this.time.isPresent()
-                ? time.get().format(DateTimeFormatter.ofPattern("HH:mm"))
-                : "";
+        return this.time
+                .map(t -> t.format(DateTimeFormatter.ofPattern("HH:mm")))
+                .orElse("");
     }
 
     @Override

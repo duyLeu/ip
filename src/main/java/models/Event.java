@@ -13,7 +13,7 @@ public class Event extends Task {
     private final MoonDateTime toTime;
     private static final Command COMMAND = Command.EVENT;
 
-    private Event(String name, MoonDateTime fromTime, MoonDateTime toTime) {
+    public Event(String name, MoonDateTime fromTime, MoonDateTime toTime) {
         super(name);
         this.fromTime = fromTime;
         this.toTime = toTime;

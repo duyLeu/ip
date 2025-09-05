@@ -3,10 +3,13 @@ package ui;
 import exceptions.InvalidIndexException;
 import command.Command;
 import models.Task;
+import models.TaskList;
+
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Ui {
     public Ui() {
-
     }
 
     // ===== Default Messages Methods =====
@@ -34,14 +37,18 @@ public class Ui {
     }
 
     // print out the horizontal lines top and bottom of an answer
-    public void getHorizontalLines() {
+    public void getLines() {
         System.out.println("\t____________________________________________________________");
     }
 
     // ===== Task Management Methods =====
 
+    public String scan(Scanner sc) throws IOException {
+        return sc.nextLine();
+    }
+
     // display the task list
-    public void getTaskList() {
+    public void getTaskList(TaskList taskList) {
         if (taskList.isEmpty()) {
             System.out.println("\tMoon: You haven't added anything to your list yet. Time to start tasking! A-wooooo!");
         } else {
@@ -56,7 +63,7 @@ public class Ui {
     }
 
     // delete task
-    public void deleteTask(String input) throws InvalidIndexException {
+    public void deleteTask(Task removedTask) throws InvalidIndexException {
         try {
             // the first line splits the input string then check for the *second* element for the list index
             int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;

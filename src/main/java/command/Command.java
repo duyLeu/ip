@@ -47,16 +47,4 @@ public enum Command {
     public static Stream<Command> getCommandStream() {
         return Arrays.stream(Command.values());
     }
-
-    public static Command findMatchingCommand(String input) throws InvalidCommandException {
-        String inputKeyword = input.split(" ")[0];
-
-        // Use stream and optional for cleaner code and more functionalities (i.e. filter, findFirst)
-        return Command.getCommandStream()
-                .parallel()
-                .filter(c -> c.getKeyword().equals(inputKeyword))
-                .findFirst()
-                .orElseThrow(() -> new InvalidCommandException(inputKeyword,
-                        "Wuf? Are you sure you have the correct command?"));
-    }
 }
