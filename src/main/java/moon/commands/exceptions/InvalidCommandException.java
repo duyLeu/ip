@@ -1,4 +1,4 @@
-package moon.exceptions;
+package moon.commands.exceptions;
 
 import moon.commands.enums.Command;
 import moon.parser.exceptions.ParseException;

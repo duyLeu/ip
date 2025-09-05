@@ -1,8 +1,8 @@
-package moon.parser.base;
+package moon.parser.usercommand;
 
 import moon.commands.BaseCommand;
 import moon.parser.exceptions.ParseException;
 
-public interface Parser<T extends BaseCommand> {
+public interface CommandParser<T extends BaseCommand> {
     T parse(String input) throws ParseException;
 }

@@ -2,6 +2,7 @@ package moon.storage;
 
 import moon.models.TaskList;
 import moon.parser.exceptions.ParseException;
+import moon.parser.storage.AddFromStorageParser;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,7 +38,7 @@ public class Storage {
         TaskList tasks = new TaskList();
         for (String line : lines) {
             if (!line.isBlank()) {
-                tasks.add(Parser.parseFromStorage(line));
+                tasks.add(AddFromStorageParser.parse(line));
             }
         }
         return tasks;
@@ -47,7 +48,7 @@ public class Storage {
         initialiseStorageIfNotExist();
         List<String> lines = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            lines.add(tasks.get(i).toStorage());
+            lines.add(tasks.get(i).toStorageString());
         }
         Files.write(this.storageFile, lines,
                 StandardOpenOption.CREATE,

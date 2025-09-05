@@ -22,9 +22,7 @@ public abstract class Task {
         this.done = false;
     }
 
-    public abstract String getType();
-
-    public abstract String toStorage();
+    public abstract String toStorageString();
 
     @Override
     public String toString() {

@@ -1,29 +1,14 @@
 package moon.models;
 
-import moon.commands.enums.Command;
-import moon.parser.exceptions.ParseException;
-import moon.parser.util.DateTimeParser;
-import moon.parser.util.InputChecker;
-
 // Event class represents the 'Event' type of tasks, with a description and start-end times
 public class Event extends Task {
     private final MoonDateTime fromTime;
     private final MoonDateTime toTime;
-    private static final Command COMMAND = Command.EVENT;
 
     public Event(String name, MoonDateTime fromTime, MoonDateTime toTime) {
         super(name);
         this.fromTime = fromTime;
         this.toTime = toTime;
-    }
-
-    public static Event parseFromStorage(String input) throws ParseException {
-        String[] inputList = input.split(" | ");
-        InputChecker.checkCommandFormat(inputList, COMMAND);
-
-        MoonDateTime fromTime = DateTimeParser.parse(inputList[1], true);
-        MoonDateTime toTime = DateTimeParser.parse(inputList[2], true);
-        return new Event(inputList[0], fromTime, toTime);
     }
 
     private String getFromTime() {
@@ -35,12 +20,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getType() {
-        return COMMAND.getKeyword();
-    }
-
-    @Override
-    public String toStorage() {
+    public String toStorageString() {
         return String.join(" | ",
                 "E",
                 this.isDone() ? "1" : "0",

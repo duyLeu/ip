@@ -2,8 +2,8 @@ package moon.commands;
 
 import moon.commands.enums.Command;
 import moon.models.Task;
-import moon.parser.base.UserInputParser;
 import moon.parser.exceptions.InvalidIndexException;
+import moon.parser.util.FormatChecker;
 
 public class MarkCommand extends BaseCommand {
     public static final Command COMMAND = Command.MARK;
@@ -15,7 +15,7 @@ public class MarkCommand extends BaseCommand {
 
     @Override
     public int execute() throws InvalidIndexException {
-        UserInputParser.throwExceptionIfOutOfIndex(markedIndex, getList());
+        FormatChecker.throwExceptionIfOutOfIndex(markedIndex, getList());
         Task taskToMark = getList().get(markedIndex);
         if (taskToMark.isDone()) {
             getUi().showAlreadyMarkedMessage(taskToMark);

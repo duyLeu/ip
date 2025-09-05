@@ -2,8 +2,8 @@ package moon.commands;
 
 import moon.commands.enums.Command;
 import moon.models.Task;
-import moon.parser.base.UserInputParser;
 import moon.parser.exceptions.InvalidIndexException;
+import moon.parser.util.FormatChecker;
 
 public class DeleteCommand extends BaseCommand {
     public static final Command COMMAND = Command.DELETE;
@@ -15,7 +15,7 @@ public class DeleteCommand extends BaseCommand {
 
     @Override
     public int execute() throws InvalidIndexException {
-        UserInputParser.throwExceptionIfOutOfIndex(deletedIndex, getList());
+        FormatChecker.throwExceptionIfOutOfIndex(deletedIndex, getList());
         Task deletedTask = this.getList().delete(deletedIndex);
         getUi().showDeleteTaskMessage(deletedTask);
         return COMMAND.getStatusCode();

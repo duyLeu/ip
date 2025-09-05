@@ -1,9 +1,8 @@
-package moon.parser;
+package moon.parser.usercommand;
 
 import moon.commands.ExitCommand;
-import moon.parser.base.Parser;
 
-public class ExitCommandParser implements Parser<ExitCommand> {
+public class ExitCommandParser implements CommandParser<ExitCommand> {
     public ExitCommand parse(String s) {
         return new ExitCommand();
     }

@@ -1,10 +1,12 @@
 package moon.parser.util;
 
 import moon.commands.enums.Command;
+import moon.models.TaskList;
 import moon.parser.exceptions.EmptyArgumentException;
+import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.exceptions.ParseException;
 
-public class InputChecker {
+public class FormatChecker {
     public static void checkCommandFormat(String[] inputList, Command command) throws ParseException {
         int numOfParameters = switch (command) {
             case TODO -> 1;
@@ -24,7 +26,7 @@ public class InputChecker {
     }
 
     public static void checkEmptyParameter(String inputString, Command command, boolean isTaskName)
-            throws ParseException, EmptyArgumentException {
+            throws ParseException {
 
         String exceptionMessage = isTaskName
                 ? "Wuf! Your task name cannot be empty!"
@@ -45,6 +47,13 @@ public class InputChecker {
         if (!actualInput.equals(expectedInput)) {
             throw new ParseException(command,
                     String.format("Wuf! I think you make a mistake here: '%s'", actualInput));
+        }
+    }
+
+    public static void throwExceptionIfOutOfIndex(int index, TaskList list) throws InvalidIndexException {
+        if (index < 0 || index >= list.size()) { // check for index range
+            throw new InvalidIndexException(Command.DELETE,
+                    "Wuf! Your index is out of range!");
         }
     }
 }
