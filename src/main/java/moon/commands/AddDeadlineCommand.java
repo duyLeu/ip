@@ -1,8 +1,6 @@
 package moon.commands;
 
 import moon.commands.enums.Command;
-import moon.parser.exceptions.EmptyArgumentException;
-import moon.parser.exceptions.ParseException;
 import moon.models.Deadline;
 
 public class AddDeadlineCommand extends AddCommand {

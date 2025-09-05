@@ -1,12 +1,12 @@
 package moon.parser.base;
 
-import moon.commands.*;
+import moon.commands.BaseCommand;
 import moon.commands.enums.Command;
 import moon.exceptions.InvalidCommandException;
 import moon.models.*;
+import moon.parser.*;
 import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.exceptions.ParseException;
-import moon.parser.*;
 
 public class UserInputParser {
     public static BaseCommand parse(String input) throws ParseException {

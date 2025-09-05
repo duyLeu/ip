@@ -1,6 +1,5 @@
 package moon.parser;
 
-import moon.commands.DeleteCommand;
 import moon.commands.UnmarkCommand;
 import moon.commands.enums.Command;
 import moon.parser.base.Parser;

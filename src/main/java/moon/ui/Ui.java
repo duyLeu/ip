@@ -1,14 +1,20 @@
 package moon.ui;
 
-import moon.parser.exceptions.InvalidIndexException;
-import moon.commands.enums.Command;
 import moon.models.Task;
 import moon.models.TaskList;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Ui {
+    private final Scanner sc;
+
+    public Ui(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public String scan() {
+        return sc.nextLine();
+    }
 
     public void showGreetingMessage() {
         String logo =
@@ -37,8 +43,25 @@ public class Ui {
         System.out.println("\t____________________________________________________________");
     }
 
-    public void showErrorMessage(String s) {
-        System.out.println("\t" + s);
+    public void showExceptionMessage(String s) {
+        System.out.println("\tMoon: " + s);
+    }
+
+    public void showIOExceptionMessage() {
+        showExceptionMessage("Sorryyy! I incurred some error while trying to add this task. "
+                + "Would you mind trying again? Woof!");
+    }
+
+    public void showLoadStorageSuccessfulMessage(TaskList list) {
+        System.out.printf("\tMoon: I have retrieved your previous task list!\\n%s\\t\\t  Woof!", list);
+    }
+
+    public void showLoadStorageUnsuccessfulMessage() {
+        System.out.println("\tMoon: I couldn't retrieve your previous task. No worries! Let's start again! Woof!");
+    }
+
+    public void showEmptyInitialStorageMessage() {
+        System.out.println("\tMoon: Time to start tasking! A-wooooo!");
     }
 
     public void showAddTaskMessage(Task addedTask) {
@@ -77,40 +100,5 @@ public class Ui {
     public void showUnmarkedSuccessfulMessage(Task unmarkedTask) {
         System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
                 unmarkedTask);
-    }
-
-    public String scan(Scanner sc) throws IOException {
-        return sc.nextLine();
-    }
-
-
-
-    // mark/unmark the task based on the isDone argument.
-    public void setTaskDone(String input, boolean setDone) throws InvalidIndexException {
-        try {
-
-            Task taskToSet = taskList.get(taskIndex);
-
-            if (taskToSet.isDone() == setDone) {
-                // in case task is already marked
-                System.out.printf("\tMoon: I see you have already marked/unmarked this task!\n\t\t\t%s\n",
-                        taskToSet);
-
-            } else if (setDone) {
-                taskToSet.setDone();
-                System.out.printf("\tMoon: Nicely done! I've pawed this as done! Woof!\n\t\t\t%s\n",
-                        taskToSet);
-
-            } else {
-                taskToSet.setNotDone();
-                System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
-                        taskToSet);
-
-            }
-        } catch (NumberFormatException e) { // exception thrown by parseInt()
-            Command commandType = setDone ? Command.MARK : Command.UNMARK;
-            throw new InvalidIndexException(commandType,
-                    "Wuf! I don't think you put in an integer?");
-        }
     }
 }

@@ -1,7 +1,7 @@
 package moon.commands.enums;
 
 import java.util.Arrays;
-import java.util.stream.*;
+import java.util.stream.Stream;
 
 // Command enum containing all the
 public enum Command {

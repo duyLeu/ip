@@ -1,9 +1,9 @@
 package moon.commands;
 
 import moon.commands.enums.Command;
+import moon.models.Task;
 import moon.parser.base.UserInputParser;
 import moon.parser.exceptions.InvalidIndexException;
-import moon.models.Task;
 
 public class DeleteCommand extends BaseCommand {
     public static final Command COMMAND = Command.DELETE;

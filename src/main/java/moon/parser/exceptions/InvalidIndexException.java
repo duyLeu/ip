@@ -1,7 +1,6 @@
 package moon.parser.exceptions;
 
 import moon.commands.enums.Command;
-import moon.exceptions.InvalidCommandException;
 
 // Exception thrown when list index either not an integer, or out of range of the list.
 public class InvalidIndexException extends ParseException {

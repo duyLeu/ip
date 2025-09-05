@@ -12,15 +12,23 @@ public class ParseException extends MoonException {
         super(message);
     }
 
-    public ParseException(Command command, String message) {
+    public ParseException(Command errorCommandType, String message) {
         super(message);
-        this.command = command;
+        this.command = errorCommandType;
     }
 
-    public ParseException(String parseError, Command command, String message) {
+    public ParseException(String parseError, Command errorCommandType, String message) {
         super(message);
-        this.command = command;
+        this.command = errorCommandType;
         this.parseError = parseError;
+    }
+
+    public String getParseError() {
+        return this.parseError;
+    }
+
+    public Command getErrorCommandType() {
+        return this.command;
     }
 
     @Override

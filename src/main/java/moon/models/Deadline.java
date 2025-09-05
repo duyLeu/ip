@@ -2,7 +2,6 @@ package moon.models;
 
 import moon.commands.enums.Command;
 import moon.parser.exceptions.ParseException;
-
 import moon.parser.util.DateTimeParser;
 import moon.parser.util.InputChecker;
 

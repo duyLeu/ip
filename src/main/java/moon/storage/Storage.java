@@ -1,16 +1,13 @@
 package moon.storage;
 
-import moon.exceptions.InvalidCommandException;
-import moon.parser.exceptions.ParseException;
 import moon.models.TaskList;
+import moon.parser.exceptions.ParseException;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class Storage {
         }
     }
 
-    public TaskList load() throws IOException, InvalidCommandException, ParseException {
+    public TaskList load() throws IOException, ParseException {
         initialiseStorageIfNotExist();
         List<String> lines = Files.readAllLines(storageFile);
         TaskList tasks = new TaskList();

@@ -4,7 +4,6 @@ import moon.commands.AddTodoCommand;
 import moon.commands.enums.Command;
 import moon.models.Todo;
 import moon.parser.base.Parser;
-import moon.parser.exceptions.EmptyArgumentException;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.InputChecker;
 
@@ -17,7 +16,7 @@ public class AddTodoCommandParser implements Parser<AddTodoCommand> {
         InputChecker.checkEmptyParameter(input, COMMAND, false);
 
         String todoName = input.substring(5).trim();
-        Todo newTodo = new AddTodoCommand(newTodo);
+        Todo newTodo = new Todo(todoName);
         return new AddTodoCommand(newTodo);
     }
 }

@@ -5,7 +5,6 @@ import moon.commands.enums.Command;
 import moon.models.Event;
 import moon.models.MoonDateTime;
 import moon.parser.base.Parser;
-import moon.parser.exceptions.EmptyArgumentException;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.DateTimeParser;
 import moon.parser.util.InputChecker;
