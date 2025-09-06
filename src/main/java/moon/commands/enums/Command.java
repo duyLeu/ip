@@ -3,44 +3,90 @@ package moon.commands.enums;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-// Command enum containing all the
+/**
+ * Represents all supported commands in the Moon chatbot.
+ * <p>
+ * Each command has:
+ * <ul>
+ *   <li>a keyword entered by the user,</li>
+ *   <li>a usage format string (for error/help messages), and</li>
+ *   <li>a status code returned to the backend for control flow.</li>
+ * </ul>
+ */
 public enum Command {
-    // status code 1 is default for starting the chatbot
-
-    // each enum object has a keyword used by the program to identify which method to route to,
-    // format to output to the user in case of error
-    // and status code to return to the backend
+    /** Exit the chatbot. */
     EXIT("bye", "bye", 0),
+
+    /** List all current tasks. */
     LIST("list", "list", 2),
+
+    /** Mark a task as done. */
     MARK("mark", "mark {task number}", 4),
+
+    /** Mark a task as not done. */
     UNMARK("unmark", "unmark {task number}", 5),
+
+    /** Add a todo task. */
     TODO("todo", "todo {task description}", 6),
+
+    /** Add a deadline task with a due time. */
     DEADLINE("deadline", "deadline {task description} /by {deadline time}", 7),
+
+    /** Add an event task with start and end times. */
     EVENT("event", "event {task description} /from {start time} /by {end time}", 8),
+
+    /** Delete a task by its index. */
     DELETE("delete", "delete {task number}", 9);
 
     private final String keyword;
     private final String format;
     private final int statusCode;
 
+    /**
+     * Constructs a command enum constant.
+     *
+     * @param keyword    User input keyword that triggers this command
+     * @param format     Usage format shown in error/help messages
+     * @param statusCode Status code returned after executing this command
+     */
     Command(String keyword, String format, int statusCode) {
         this.keyword = keyword;
         this.format = format;
         this.statusCode = statusCode;
     }
 
+    /**
+     * Returns the keyword used to trigger this command.
+     *
+     * @return Keyword string
+     */
     public String getKeyword() {
         return this.keyword;
     }
 
+    /**
+     * Returns the usage format for this command.
+     *
+     * @return Format string
+     */
     public String getFormat() {
         return this.format;
     }
 
+    /**
+     * Returns the status code associated with this command.
+     *
+     * @return Status code integer
+     */
     public int getStatusCode() {
         return this.statusCode;
     }
 
+    /**
+     * Returns a stream of all defined commands.
+     *
+     * @return Stream of {@link Command} values
+     */
     // return a stream version of the list of Command objects.
     public static Stream<Command> getCommandStream() {
         return Arrays.stream(Command.values());
