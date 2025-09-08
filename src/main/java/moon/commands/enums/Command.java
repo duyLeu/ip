@@ -17,7 +17,8 @@ public enum Command {
     TODO("todo", "todo {task description}", 6),
     DEADLINE("deadline", "deadline {task description} /by {deadline time}", 7),
     EVENT("event", "event {task description} /from {start time} /by {end time}", 8),
-    DELETE("delete", "delete {task number}", 9);
+    DELETE("delete", "delete {task number}", 9),
+    FIND("find", "find {keyword}", 10);
 
     private final String keyword;
     private final String format;

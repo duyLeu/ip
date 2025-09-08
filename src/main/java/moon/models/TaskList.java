@@ -29,6 +29,17 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    public TaskList findByName(String s) {
+        if (s.isEmpty()) {
+            return new TaskList();
+        }
+        TaskList tempList = new TaskList();
+        this.tasks.stream()
+                .filter(task -> task.getName().contains(s))
+                .forEach(tempList::add);
+        return tempList;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
