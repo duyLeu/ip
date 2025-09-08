@@ -8,7 +8,7 @@ import moon.parser.util.ExtractString;
 import moon.parser.util.FormatChecker;
 
 public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
-    public static final Command COMMAND = Command.EVENT;
+    private static final Command COMMAND = Command.EVENT;
 
     @Override
     // function that parse the string input to initialize a new To-do object

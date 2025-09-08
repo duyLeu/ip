@@ -18,6 +18,7 @@ public class UserInputParser {
             case DEADLINE -> new AddDeadlineCommandParser();
             case EVENT -> new AddEventCommandParser();
             case DELETE -> new DeleteCommandParser();
+            case FIND -> new FindTaskCommandParser();
         };
         return p.parse(input);
     }

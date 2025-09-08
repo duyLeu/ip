@@ -101,4 +101,12 @@ public class Ui {
         System.out.printf("\tMoon: No worries! I've pawed this as not done! You can do it! Woof!\n\t\t\t%s\n",
                 unmarkedTask);
     }
+
+    public void showTasksMatchedMessage(TaskList matchedTasks, String keyword) {
+        if (matchedTasks.isEmpty()) {
+            System.out.printf("\tMoon: I can't find any tasks matching your keyword: %s . Wuf!\n", keyword);
+        } else {
+            System.out.printf("\tMoon: I found these tasks matching your keyword!\n%s\t\t  Woof!\n", matchedTasks);
+        }
+    }
 }
