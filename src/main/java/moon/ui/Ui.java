@@ -3,6 +3,7 @@ package moon.ui;
 import moon.models.Task;
 import moon.models.TaskList;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +13,7 @@ public class Ui {
         this.sc = sc;
     }
 
-    public String scan() {
+    public String scan() throws NoSuchElementException {
         return sc.nextLine();
     }
 

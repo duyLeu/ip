@@ -8,6 +8,7 @@ import moon.storage.Storage;
 import moon.ui.Ui;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -88,7 +89,7 @@ public class Moon {
             } catch (MoonException e) {   // exceptions returned by parser/commands
                 ui.showExceptionMessage(e.getMessage());
                 statusCode = -1;
-            } catch (IOException e) {     // exceptions returned by scanner or storage
+            } catch (NoSuchElementException | IOException e) {     // exceptions returned by scanner or storage
                 ui.showIOExceptionMessage();
                 statusCode = -1;
             }
