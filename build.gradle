@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'moon.Launcher'
+}
+
+checkstyle {
+    toolVersion = '11.0.0'
+    configFile = file("config/checkstyle/checkstyle.xml")
+}
