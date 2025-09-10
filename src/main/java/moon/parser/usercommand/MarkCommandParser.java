@@ -4,8 +4,6 @@ import moon.commands.MarkCommand;
 import moon.commands.enums.Command;
 import moon.parser.exceptions.InvalidIndexException;
 
-import java.util.Arrays;
-
 public class MarkCommandParser implements CommandParser<MarkCommand> {
     public MarkCommand parse(String input) throws InvalidIndexException {
         // the first line splits the input string then check for the *second* element for the list index

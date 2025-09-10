@@ -1,18 +1,18 @@
 package moon.parser.util;
 
-import moon.models.MoonDateTime;
-import moon.parser.exceptions.ParseException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+import moon.models.MoonDateTime;
+import moon.parser.exceptions.ParseException;
+
 public class DateTimeParser {
-    private static final DateTimeFormatter DATE     = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter DATETIME = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    private static final DateTimeFormatter MOONDATE     = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private static final DateTimeFormatter MOONDATE = DateTimeFormatter.ofPattern("MMM d yyyy");
     private static final DateTimeFormatter MOONDATETIME = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
 

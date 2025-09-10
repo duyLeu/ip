@@ -12,7 +12,7 @@ import moon.parser.util.FormatChecker;
 public class AddEventCommandParser implements CommandParser<AddEventCommand> {
     private static final Command COMMAND = Command.EVENT;
     private static final String PREFIX_FROM = "from";
-    private static final String PREFIX_TO   = "to";
+    private static final String PREFIX_TO = "to";
 
     @Override
     public AddEventCommand parse(String input) throws ParseException {

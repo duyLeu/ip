@@ -9,11 +9,11 @@ import moon.parser.exceptions.ParseException;
 public class FormatChecker {
     public static void checkCommandFormat(String[] inputList, Command command) throws ParseException {
         int numOfParameters = switch (command) {
-            case TODO -> 1;
-            case DEADLINE -> 2;
-            case EVENT -> 3;
-            default -> throw new ParseException(command,
-                    "Wuf! Are you sure you have the correct command?");
+        case TODO -> 1;
+        case DEADLINE -> 2;
+        case EVENT -> 3;
+        default -> throw new ParseException(command,
+                "Wuf! Are you sure you have the correct command?");
         };
 
         if (inputList.length < numOfParameters) {
@@ -31,11 +31,11 @@ public class FormatChecker {
         String exceptionMessage = isTaskName
                 ? "Wuf! Your task name cannot be empty!"
                 : switch (command) {
-                    case DEADLINE -> "Wuf! Your deadline time cannot be empty!";
-                    case EVENT -> "Wuf! Both your start and end time cannot be empty!";
-                    default -> throw new ParseException(command,
-                            "Wuf! Are you sure you have the correct command?");
-                };
+        case DEADLINE -> "Wuf! Your deadline time cannot be empty!";
+        case EVENT -> "Wuf! Both your start and end time cannot be empty!";
+        default -> throw new ParseException(command,
+                "Wuf! Are you sure you have the correct command?");
+        };
 
         if (inputString.split(" ").length <= 1) {
             System.out.println(inputString);
