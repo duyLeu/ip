@@ -27,7 +27,6 @@ public class FormatChecker {
 
     public static void checkEmptyParameter(String inputString, Command command, boolean isTaskName)
             throws ParseException {
-
         String exceptionMessage = isTaskName
                 ? "Wuf! Your task name cannot be empty!"
                 : switch (command) {
