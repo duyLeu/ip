@@ -19,8 +19,8 @@ public class AddDeadlineCommandParser implements CommandParser<AddDeadlineComman
         // split the string by the " /" separator into, supposedly, two parts: description, and deadline
         String[] inputList = input.split(" /");
 
-        FormatChecker.checkCommandFormat(inputList, COMMAND);
         FormatChecker.checkEmptyParameter(inputList[0], COMMAND, true);
+        FormatChecker.checkCommandFormat(inputList, COMMAND);
 
         String deadlineName = ExtractString.extract(inputList[0], COMMAND.getKeyword());
         String byKeyword = inputList[1].split("\\s+")[0];

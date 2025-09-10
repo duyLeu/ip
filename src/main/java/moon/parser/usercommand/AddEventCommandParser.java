@@ -19,8 +19,8 @@ public class AddEventCommandParser implements CommandParser<AddEventCommand> {
         // split the string by the " /" separator into, supposedly, three parts: description, start time, end time
         String[] inputList = input.split(" /");
 
-        FormatChecker.checkCommandFormat(inputList, COMMAND);
         FormatChecker.checkEmptyParameter(inputList[0], COMMAND, true);
+        FormatChecker.checkCommandFormat(inputList, COMMAND);
 
         String eventName = ExtractString.extract(inputList[0], COMMAND.getKeyword());
         String fromKeyword = inputList[1].split("\\s+")[0];
