@@ -12,7 +12,7 @@ import moon.parser.util.FormatChecker;
 public class AddDeadlineCommandParser implements CommandParser<AddDeadlineCommand> {
     private static final Command COMMAND = Command.DEADLINE;
     private static final String PREFIX_BY = "by";
-;
+
     @Override
     // function that parse the string input to initialize a new Deadline object
     public AddDeadlineCommand parse(String input) throws ParseException {

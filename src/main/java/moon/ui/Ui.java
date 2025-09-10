@@ -1,10 +1,10 @@
 package moon.ui;
 
-import moon.models.Task;
-import moon.models.TaskList;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import moon.models.Task;
+import moon.models.TaskList;
 
 public class Ui {
     private final Scanner sc;
@@ -48,7 +48,7 @@ public class Ui {
         System.out.println("\tMoon: " + s);
     }
 
-    public void showIOExceptionMessage() {
+    public void showGeneralErrorMessage() {
         showExceptionMessage("Sorryyy! I incurred some error while trying to add this task. "
                 + "Would you mind trying again? Woof!");
     }

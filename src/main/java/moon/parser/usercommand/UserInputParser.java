@@ -10,15 +10,15 @@ public class UserInputParser {
         Command command = findMatchingCommand(input);
         // switch-case structure for better readability
         CommandParser<? extends BaseCommand> p = switch (command) {
-            case EXIT -> new ExitCommandParser();
-            case LIST -> new ListCommandParser();
-            case MARK -> new MarkCommandParser();
-            case UNMARK -> new UnmarkCommandParser();
-            case TODO -> new AddTodoCommandParser();
-            case DEADLINE -> new AddDeadlineCommandParser();
-            case EVENT -> new AddEventCommandParser();
-            case DELETE -> new DeleteCommandParser();
-            case FIND -> new FindTaskCommandParser();
+        case EXIT -> new ExitCommandParser();
+        case LIST -> new ListCommandParser();
+        case MARK -> new MarkCommandParser();
+        case UNMARK -> new UnmarkCommandParser();
+        case TODO -> new AddTodoCommandParser();
+        case DEADLINE -> new AddDeadlineCommandParser();
+        case EVENT -> new AddEventCommandParser();
+        case DELETE -> new DeleteCommandParser();
+        case FIND -> new FindTaskCommandParser();
         };
         return p.parse(input);
     }

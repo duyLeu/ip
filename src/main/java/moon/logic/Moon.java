@@ -1,15 +1,15 @@
 package moon.logic;
 
+import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 import moon.commands.BaseCommand;
 import moon.logic.exceptions.MoonException;
 import moon.models.TaskList;
 import moon.parser.usercommand.UserInputParser;
 import moon.storage.Storage;
 import moon.ui.Ui;
-
-import java.io.IOException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /**
  * Main logic class of the Moon chatbot.
@@ -67,10 +67,10 @@ public class Moon {
      * Runs the main input-processing loop until the user uses the exit command.
      */
     public void keepRunUntilExitCommand() {
-        int statusCode = 1;              // status code 1: running
-        while (statusCode != 0) {        // status code 0: exit
+        int statusCode = 1; // status code 1: running
+        while (statusCode != 0) { // status code 0: exit
             try {
-                if (statusCode != -1) {  // status code -1: error
+                if (statusCode != -1) { // status code -1: error
                     ui.showLines();
                     ui.showAskingMessage();
                 }
@@ -86,11 +86,11 @@ public class Moon {
                 statusCode = c.execute();
                 this.storage.rewrite(this.taskList);
 
-            } catch (MoonException e) {   // exceptions returned by parser/commands
+            } catch (MoonException e) { // exceptions returned by parser/commands
                 ui.showExceptionMessage(e.getMessage());
                 statusCode = -1;
-            } catch (NoSuchElementException | IOException e) {     // exceptions returned by scanner or storage
-                ui.showIOExceptionMessage();
+            } catch (NoSuchElementException | IOException e) { // exceptions returned by scanner or storage
+                ui.showGeneralErrorMessage();
                 statusCode = -1;
             }
         }

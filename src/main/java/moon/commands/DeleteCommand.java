@@ -1,7 +1,6 @@
 package moon.commands;
 
 import moon.commands.enums.Command;
-import moon.models.Deadline;
 import moon.models.Task;
 import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.util.FormatChecker;
