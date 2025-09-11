@@ -29,7 +29,11 @@ test {
 }
 
 application {
-    mainClass = 'moon.Launcher'
+    mainClass.set('moon.Launcher')
+}
+
+shadowJar {
+    archiveFileName = 'moon.jar'
 }
 
 checkstyle {
