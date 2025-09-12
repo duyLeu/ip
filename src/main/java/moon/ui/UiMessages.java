@@ -6,10 +6,10 @@ import java.util.Scanner;
 import moon.models.Task;
 import moon.models.TaskList;
 
-public class Ui {
+public class UiMessages {
     private final Scanner sc;
 
-    public Ui(Scanner sc) {
+    public UiMessages(Scanner sc) {
         this.sc = sc;
     }
 
@@ -75,12 +75,12 @@ public class Ui {
                 deletedTask);
     }
 
-    public void showEmptyListMessage() {
-        System.out.println("\tMoon: You haven't added anything to your list yet. Time to start tasking! A-wooooo!");
-    }
-
     public void showListMessage(TaskList list) {
-        System.out.printf("\tMoon: Here are the items in your list!\n%s\t\t  Woof!\n", list);
+        if (list.isEmpty()) {
+            System.out.println("\tMoon: You haven't added anything to your list yet. Time to start tasking! A-wooooo!");
+        } else {
+            System.out.printf("\tMoon: Here are the items in your list!\n%s\t\t  Woof!\n", list);
+        }
     }
 
     public void showAlreadyMarkedMessage(Task alreadyMarkedTask) {

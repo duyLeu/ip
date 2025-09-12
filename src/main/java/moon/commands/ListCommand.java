@@ -17,11 +17,7 @@ public class ListCommand extends BaseCommand {
      */
     @Override
     public int execute() {
-        if (getList().isEmpty()) {
-            getUi().showEmptyListMessage();
-        } else {
-            getUi().showListMessage(getList());
-        }
+        getUi().showListMessage(getList());
         return COMMAND.getStatusCode();
     }
 }

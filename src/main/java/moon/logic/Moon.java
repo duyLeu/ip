@@ -9,7 +9,7 @@ import moon.logic.exceptions.MoonException;
 import moon.models.TaskList;
 import moon.parser.usercommand.UserInputParser;
 import moon.storage.Storage;
-import moon.ui.Ui;
+import moon.ui.UiMessages;
 
 /**
  * Main logic class of the Moon chatbot.
@@ -17,7 +17,8 @@ import moon.ui.Ui;
  * Passes data between the UI, storage, and the commands.
  */
 public class Moon {
-    protected final Ui ui;
+    private static final String DEFAULT_FILEPATH = "src/data/storage.txt";
+    protected final UiMessages uiMessages;
     private final String filepath;
     private Storage storage;
     private TaskList taskList;
@@ -29,8 +30,19 @@ public class Moon {
      */
     public Moon(String filepath) {
         Scanner myScanner = new Scanner(System.in);
-        this.ui = new Ui(myScanner);
+        this.uiMessages = new UiMessages(myScanner);
         this.filepath = filepath;
+    }
+
+    public Moon() {
+        this(DEFAULT_FILEPATH);
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Moon heard: " + input;
     }
 
     /**
@@ -43,13 +55,13 @@ public class Moon {
             taskList = storage.load();
 
             if (taskList.isEmpty()) {
-                ui.showEmptyInitialStorageMessage();
+                uiMessages.showEmptyInitialStorageMessage();
             } else {
-                ui.showLoadStorageSuccessfulMessage(this.taskList);
+                uiMessages.showLoadStorageSuccessfulMessage(this.taskList);
             }
         } catch (IOException | MoonException e) {
             taskList = new TaskList();
-            ui.showLoadStorageUnsuccessfulMessage();
+            uiMessages.showLoadStorageUnsuccessfulMessage();
         }
     }
 
@@ -58,7 +70,7 @@ public class Moon {
      * initialising storage, and entering the main loop.
      */
     public void run() {
-        ui.showGreetingMessage();
+        uiMessages.showGreetingMessage();
         initiateStorage();
         keepRunUntilExitCommand();
     }
@@ -71,26 +83,26 @@ public class Moon {
         while (statusCode != 0) { // status code 0: exit
             try {
                 if (statusCode != -1) { // status code -1: error
-                    ui.showLines();
-                    ui.showAskingMessage();
+                    uiMessages.showLines();
+                    uiMessages.showAskingMessage();
                 }
 
-                String userInput = ui.scan();
+                String userInput = uiMessages.scan();
 
                 // parse the user input, then send the meta-data, including the task list
                 // and the UI, execute the command, which will return a status code.
                 // Then rewrite the storage.txt file using the new, modified task list
                 // (Not the most efficient solution, but for small amount of data, it is acceptable)
                 BaseCommand c = UserInputParser.parse(userInput);
-                c.setMetaData(this.taskList, this.ui);
+                c.setMetaData(this.taskList, this.uiMessages);
                 statusCode = c.execute();
                 this.storage.rewrite(this.taskList);
 
             } catch (MoonException e) { // exceptions returned by parser/commands
-                ui.showExceptionMessage(e.getMessage());
+                uiMessages.showExceptionMessage(e.getMessage());
                 statusCode = -1;
             } catch (NoSuchElementException | IOException e) { // exceptions returned by scanner or storage
-                ui.showGeneralErrorMessage();
+                uiMessages.showGeneralErrorMessage();
                 statusCode = -1;
             }
         }
