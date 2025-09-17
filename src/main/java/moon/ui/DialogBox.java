@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -26,8 +27,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            dialog.maxWidthProperty().bind(this.widthProperty().subtract(100)); // leave room for avatar/padding
+            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
 
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
@@ -37,6 +37,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.maxWidthProperty().bind(this.widthProperty().subtract(100));
         displayPicture.setImage(img);
     }
 

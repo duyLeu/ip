@@ -29,7 +29,6 @@ public class Main extends Application {
             stage.setTitle("Moon");
             stage.setMinHeight(220);
             stage.setMinWidth(417);
-            // stage.setMaxWidth(417); // Add this if you didn't automatically resize elements
             stage.show();
 
             controller.showGreeting();

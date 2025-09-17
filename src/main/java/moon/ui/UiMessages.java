@@ -33,7 +33,7 @@ public class UiMessages {
     }
 
     public String showExceptionMessage(String s) {
-        return "\tMoon: " + s;
+        return s;
     }
 
     public String showGeneralErrorMessage() {
@@ -41,7 +41,7 @@ public class UiMessages {
     }
 
     public String showLoadStorageSuccessfulMessage(TaskList list) {
-        return String.format("I have retrieved your previous task list!\n%s\t\t  Woof!", list);
+        return String.format("I have retrieved your previous task list!\n%s  Woof!", list);
     }
 
     public String showLoadStorageUnsuccessfulMessage() {
@@ -53,38 +53,38 @@ public class UiMessages {
     }
 
     public String showAddTaskMessage(Task addedTask) {
-        return String.format("Copy that! I've added this task!\n\t\t%s\n", addedTask);
+        return String.format("Copy that! I've added this task!\n\t%s\n", addedTask);
     }
 
     public String showDeleteTaskMessage(Task deletedTask) {
-        return String.format("Copy that! I've deleted this task! Woof!\n\t\t%s\n", deletedTask);
+        return String.format("Copy that! I've deleted this task! Woof!\n\t%s\n", deletedTask);
     }
 
     public String showListMessage(TaskList list) {
         if (list.isEmpty()) {
             return "You haven't added anything to your list yet. Time to start tasking! A-wooooo!";
         } else {
-            return String.format("Here are the items in your list!\n%s\t\t  Woof!\n", list);
+            return String.format("Here are the items in your list!\n%s  Woof!\n", list);
         }
     }
 
     public String showAlreadyMarkedMessage(Task alreadyMarkedTask) {
-        return String.format("I see you have already marked this task!\n\t\t\t%s\n",
+        return String.format("I see you have already marked this task!\n  %s\n",
                 alreadyMarkedTask);
     }
 
     public String showAlreadyUnmarkedMessage(Task alreadyUnmarkedTask) {
-        return String.format("I see you have already unmarked this task!\n\t\t\t%s\n",
+        return String.format("I see you have already unmarked this task!\n  %s\n",
                 alreadyUnmarkedTask);
     }
 
     public String showMarkedSuccessfulMessage(Task markedTask) {
-        return String.format("Nicely done! I've pawed this as done! Woof!\n\t\t%s\n",
+        return String.format("Nicely done! I've pawed this as done! Woof!\n\t  %s\n",
                 markedTask);
     }
 
     public String showUnmarkedSuccessfulMessage(Task unmarkedTask) {
-        return String.format("No worries! I've pawed this as not done! You can do it! Woof!\n\t\t%s\n",
+        return String.format("No worries! I've pawed this as not done! You can do it! Woof!\n  %s\n",
                 unmarkedTask);
     }
 
@@ -92,7 +92,7 @@ public class UiMessages {
         if (matchedTasks.isEmpty()) {
             return String.format("I can't find any tasks matching your keyword: %s . Wuf!\n", keyword);
         } else {
-            return String.format("I found these tasks matching your keyword!\n%s\t\t  Woof!\n", matchedTasks);
+            return String.format("I found these tasks matching your keyword!\n%s  Woof!\n", matchedTasks);
         }
     }
 }

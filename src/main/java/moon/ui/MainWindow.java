@@ -62,6 +62,13 @@ public class MainWindow extends AnchorPane {
         String response = this.moon.getResponse(input);
 
         if (moon.isExitCommand(input)) {
+            try {
+                Thread.sleep(3000); // Delay of 3 seconds before quitting
+            } catch (InterruptedException e) {
+                // Handle the InterruptedException if the thread is interrupted while sleeping
+                Thread.currentThread().interrupt(); // Restore the interrupted status
+                System.err.println("Thread interrupted during sleep: " + e.getMessage());
+            }
             addMoonMessage(UiMessages.showExitMessage());
             Platform.exit(); // cleanly shuts down JavaFX
         }
