@@ -1,21 +1,9 @@
 package moon.ui;
 
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
 import moon.models.Task;
 import moon.models.TaskList;
 
 public class UiMessages {
-    private final Scanner sc;
-
-    public UiMessages(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public String scan() throws NoSuchElementException {
-        return sc.nextLine();
-    }
 
     public static String showGreetingMessage() {
         String logo =
@@ -30,12 +18,12 @@ public class UiMessages {
     }
 
     // display goodbye message when exit the bot
-    public String showExitMessage() {
+    public static String showExitMessage() {
         return "Byeee! Hope to see you again! A-woooooooooooo! 🐾";
     }
 
     // display prompting message when the chatbot wants to ask
-    public String showAskingMessage() {
+    public static String showAskingMessage() {
         return "How may I help you?";
     }
 
@@ -49,7 +37,7 @@ public class UiMessages {
     }
 
     public String showGeneralErrorMessage() {
-        return "Sorryyy! I incurred some error while trying to add this task.\nWould you mind trying again? Woof!");
+        return "Sorryyy! I incurred some error while trying to add this task.\nWould you mind trying again? Woof!";
     }
 
     public String showLoadStorageSuccessfulMessage(TaskList list) {
@@ -65,13 +53,11 @@ public class UiMessages {
     }
 
     public String showAddTaskMessage(Task addedTask) {
-       return String.format("Copy that! I've added this task!\n\t\t%s\n",
-                addedTask);
+        return String.format("Copy that! I've added this task!\n\t\t%s\n", addedTask);
     }
 
     public String showDeleteTaskMessage(Task deletedTask) {
-        return String.format("Copy that! I've deleted this task! Woof!\n\t\t%s\n",
-                deletedTask);
+        return String.format("Copy that! I've deleted this task! Woof!\n\t\t%s\n", deletedTask);
     }
 
     public String showListMessage(TaskList list) {

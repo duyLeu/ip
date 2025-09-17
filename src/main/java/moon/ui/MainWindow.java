@@ -1,5 +1,6 @@
 package moon.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -30,6 +31,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Ensure children can use full width so maxWidth on the Label matters
+        dialogContainer.setFillWidth(true);
+        scrollPane.setFitToWidth(true);
     }
 
     /** Injects the Moon instance */
@@ -37,8 +42,13 @@ public class MainWindow extends AnchorPane {
         this.moon = moon;
     }
 
-    public void showGreeting(String text) {
-        addMoonMessage(text);
+    public void showGreeting() {
+        addMoonMessage(UiMessages.showGreetingMessage());
+        userInput.requestFocus();
+    }
+
+    public void showInitialStorage() {
+        addMoonMessage(moon.initiateStorage());
         userInput.requestFocus();
     }
 
@@ -50,8 +60,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = this.moon.getResponse(input);
+
+        if (moon.isExitCommand(input)) {
+            addMoonMessage(UiMessages.showExitMessage());
+            Platform.exit(); // cleanly shuts down JavaFX
+        }
+
         addUserMessage(input);
         addMoonMessage(response);
+
+        addMoonMessage(UiMessages.showAskingMessage());
 
         userInput.clear();
     }
@@ -61,7 +79,7 @@ public class MainWindow extends AnchorPane {
      */
     public void addMoonMessage(String message) {
         dialogContainer.getChildren().add(
-                DialogBox.getMoonDialog(message, userImage)   // custom class with avatar/bubble
+                DialogBox.getMoonDialog(message, userImage) // custom class with avatar/bubble
         );
     }
 

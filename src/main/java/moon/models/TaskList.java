@@ -101,7 +101,7 @@ public class TaskList {
     public String toString() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            output.append(String.format("\t\t  %d. %s\n", i + 1, tasks.get(i)));
+            output.append(String.format("  %d. %s\n", i + 1, tasks.get(i)));
         }
         return output.toString();
     }

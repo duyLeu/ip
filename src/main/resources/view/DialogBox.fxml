@@ -17,7 +17,9 @@
     <children>
         <Label fx:id="dialog"
                text="Label"
-               wrapText="true">
+               wrapText="true"
+               maxWidth="360"
+               textOverrun="CLIP">
 
             <HBox.margin>
                 <Insets left="7.0"

@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import moon.logic.Moon;
 import moon.ui.MainWindow;
-import moon.ui.UiMessages;
 
 public class Main extends Application {
     private final Moon moon = new Moon();
@@ -33,7 +32,8 @@ public class Main extends Application {
             // stage.setMaxWidth(417); // Add this if you didn't automatically resize elements
             stage.show();
 
-            controller.showGreeting(UiMessages.showGreetingMessage());
+            controller.showGreeting();
+            controller.showInitialStorage();
         } catch (IOException e) {
             e.printStackTrace();
         }
