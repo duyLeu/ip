@@ -29,9 +29,8 @@ public class AddTodoCommand extends AddCommand {
      * @return Status code for {@link Command#TODO}
      */
     @Override
-    public int execute() {
+    public String execute() {
         addToStorage(todo);
-        getUi().showAddTaskMessage(todo);
-        return COMMAND.getStatusCode();
+        return getUi().showAddTaskMessage(todo);
     }
 }

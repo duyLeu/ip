@@ -25,31 +25,53 @@ public class MainWindow extends AnchorPane {
     private Moon moon;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image moonImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Moon instance */
     public void setMoon(Moon moon) {
         this.moon = moon;
     }
 
+    public void showGreeting(String text) {
+        addMoonMessage(text);
+        userInput.requestFocus();
+    }
+
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Moon's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = this.moon.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        addUserMessage(input);
+        addMoonMessage(response);
+
         userInput.clear();
+    }
+
+    /**
+     * Adds a message from the bot into the dialog container.
+     */
+    public void addMoonMessage(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getMoonDialog(message, userImage)   // custom class with avatar/bubble
+        );
+    }
+
+    /**
+     * Adds a message from the user into the dialog container.
+     */
+    public void addUserMessage(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(message, moonImage)
+        );
     }
 }
 

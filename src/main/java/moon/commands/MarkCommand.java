@@ -36,16 +36,15 @@ public class MarkCommand extends BaseCommand {
      * @throws InvalidIndexException If the provided index is out of range
      */
     @Override
-    public int execute() throws InvalidIndexException {
+    public String execute() throws InvalidIndexException {
         FormatChecker.throwExceptionIfOutOfIndex(markedIndex, getList());
         Task taskToMark = getList().get(markedIndex);
 
         if (taskToMark.isDone()) {
-            getUi().showAlreadyMarkedMessage(taskToMark);
+            return getUi().showAlreadyMarkedMessage(taskToMark);
         } else {
             taskToMark.setDone(true);
-            getUi().showMarkedSuccessfulMessage(taskToMark);
+            return getUi().showMarkedSuccessfulMessage(taskToMark);
         }
-        return COMMAND.getStatusCode();
     }
 }

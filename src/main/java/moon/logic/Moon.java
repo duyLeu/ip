@@ -42,26 +42,26 @@ public class Moon {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "Moon heard: " + input;
+
     }
 
     /**
      * Initialises the storage and loads tasks from file.
      * If loading fails, starts with an empty task list.
      */
-    public void initiateStorage() {
+    public String initiateStorage() {
         try {
             this.storage = new Storage(filepath);
             taskList = storage.load();
 
             if (taskList.isEmpty()) {
-                uiMessages.showEmptyInitialStorageMessage();
+                return uiMessages.showEmptyInitialStorageMessage();
             } else {
-                uiMessages.showLoadStorageSuccessfulMessage(this.taskList);
+                return uiMessages.showLoadStorageSuccessfulMessage(this.taskList);
             }
         } catch (IOException | MoonException e) {
             taskList = new TaskList();
-            uiMessages.showLoadStorageUnsuccessfulMessage();
+            return uiMessages.showLoadStorageUnsuccessfulMessage();
         }
     }
 
@@ -73,6 +73,31 @@ public class Moon {
         uiMessages.showGreetingMessage();
         initiateStorage();
         keepRunUntilExitCommand();
+    }
+
+    public String processUserInput(String userInput) {
+        try {
+            // parse the user input, then send the meta-data, including the task list
+            // and the UI, execute the command, which will return a status code.
+            // Then rewrite the storage.txt file using the new, modified task list
+            // (Not the most efficient solution, but for small amount of data, it is acceptable)
+            BaseCommand c = UserInputParser.parse(userInput);
+            c.setMetaData(this.taskList, this.uiMessages);
+            int statusCode = c.execute();
+            this.storage.rewrite(this.taskList);
+
+            if (statusCode != -1) { // status code -1: error
+                uiMessages.showLines();
+                uiMessages.showAskingMessage();
+            }
+
+        } catch (MoonException e) { // exceptions returned by parser/commands
+            uiMessages.showExceptionMessage(e.getMessage());
+            statusCode = -1;
+        } catch (NoSuchElementException | IOException e) { // exceptions returned by scanner or storage
+            uiMessages.showGeneralErrorMessage();
+            statusCode = -1;
+        }
     }
 
     /**

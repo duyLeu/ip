@@ -36,16 +36,15 @@ public class UnmarkCommand extends BaseCommand {
      * @throws InvalidIndexException If the provided index is out of range
      */
     @Override
-    public int execute() throws InvalidIndexException {
+    public String execute() throws InvalidIndexException {
         FormatChecker.throwExceptionIfOutOfIndex(unmarkedIndex, getList());
         Task taskToUnmark = getList().get(unmarkedIndex);
 
         if (!taskToUnmark.isDone()) {
-            getUi().showAlreadyUnmarkedMessage(taskToUnmark);
+            return getUi().showAlreadyUnmarkedMessage(taskToUnmark);
         } else {
             taskToUnmark.setDone(false);
-            getUi().showUnmarkedSuccessfulMessage(taskToUnmark);
+            return getUi().showUnmarkedSuccessfulMessage(taskToUnmark);
         }
-        return COMMAND.getStatusCode();
     }
 }

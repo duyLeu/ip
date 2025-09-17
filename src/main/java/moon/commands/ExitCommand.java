@@ -14,8 +14,7 @@ public class ExitCommand extends BaseCommand {
      * @return Status code for {@link Command#EXIT}
      */
     @Override
-    public int execute() {
-        getUi().showExitMessage();
-        return COMMAND.getStatusCode();
+    public String execute() {
+        return getUi().showExitMessage();
     }
 }

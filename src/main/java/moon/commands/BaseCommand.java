@@ -25,7 +25,7 @@ public abstract class BaseCommand {
      *         </ul>
      * @throws ParseException If the input could not be parsed properly
      */
-    public abstract int execute() throws ParseException;
+    public abstract String execute() throws ParseException;
 
     /**
      * Sets metadata needed by this command before execution.

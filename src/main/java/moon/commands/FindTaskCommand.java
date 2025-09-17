@@ -11,9 +11,8 @@ public class FindTaskCommand extends BaseCommand {
         this.keyword = keyword;
     }
 
-    public int execute() {
+    public String execute() {
         TaskList matchingTasks = this.getList().findByName(this.keyword);
-        this.getUi().showTasksMatchedMessage(matchingTasks, this.keyword);
-        return COMMAND.getStatusCode();
+        return getUi().showTasksMatchedMessage(matchingTasks, this.keyword);
     }
 }

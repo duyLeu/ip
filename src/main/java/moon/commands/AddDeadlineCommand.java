@@ -29,9 +29,8 @@ public class AddDeadlineCommand extends AddCommand {
      * @return Status code for {@link Command#DEADLINE}
      */
     @Override
-    public int execute() {
+    public String execute() {
         addToStorage(deadline);
-        getUi().showAddTaskMessage(deadline);
-        return COMMAND.getStatusCode();
+        return getUi().showAddTaskMessage(deadline);
     }
 }

@@ -29,9 +29,8 @@ public class AddEventCommand extends AddCommand {
      * @return Status code for {@link Command#EVENT}
      */
     @Override
-    public int execute() {
+    public String execute() {
         addToStorage(event);
-        getUi().showAddTaskMessage(event);
-        return COMMAND.getStatusCode();
+        return getUi().showAddTaskMessage(event);
     }
 }

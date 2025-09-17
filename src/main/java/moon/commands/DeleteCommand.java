@@ -33,10 +33,9 @@ public class DeleteCommand extends BaseCommand {
      * @throws InvalidIndexException If the provided index is out of range
      */
     @Override
-    public int execute() throws InvalidIndexException {
+    public String execute() throws InvalidIndexException {
         FormatChecker.throwExceptionIfOutOfIndex(deletedIndex, getList());
         Task deletedTask = this.getList().delete(deletedIndex);
-        getUi().showDeleteTaskMessage(deletedTask);
-        return COMMAND.getStatusCode();
+        return getUi().showDeleteTaskMessage(deletedTask);
     }
 }

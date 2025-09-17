@@ -16,8 +16,7 @@ public class ListCommand extends BaseCommand {
      * @return Status code for {@link Command#LIST}
      */
     @Override
-    public int execute() {
-        getUi().showListMessage(getList());
-        return COMMAND.getStatusCode();
+    public String execute() {
+        return getUi().showListMessage(getList());
     }
 }
