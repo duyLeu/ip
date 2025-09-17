@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Moon moon;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image moonImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserPic.jpg"));
+    private Image moonImage = new Image(this.getClass().getResourceAsStream("/images/BotPic.jpg"));
 
     @FXML
     public void initialize() {
@@ -63,13 +63,13 @@ public class MainWindow extends AnchorPane {
 
         if (moon.isExitCommand(input)) {
             try {
+                addMoonMessage(UiMessages.showExitMessage());
                 Thread.sleep(3000); // Delay of 3 seconds before quitting
             } catch (InterruptedException e) {
                 // Handle the InterruptedException if the thread is interrupted while sleeping
                 Thread.currentThread().interrupt(); // Restore the interrupted status
                 System.err.println("Thread interrupted during sleep: " + e.getMessage());
             }
-            addMoonMessage(UiMessages.showExitMessage());
             Platform.exit(); // cleanly shuts down JavaFX
         }
 
@@ -86,7 +86,7 @@ public class MainWindow extends AnchorPane {
      */
     public void addMoonMessage(String message) {
         dialogContainer.getChildren().add(
-                DialogBox.getMoonDialog(message, userImage) // custom class with avatar/bubble
+                DialogBox.getMoonDialog(message, moonImage) // custom class with avatar/bubble
         );
     }
 
@@ -95,7 +95,7 @@ public class MainWindow extends AnchorPane {
      */
     public void addUserMessage(String message) {
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(message, moonImage)
+                DialogBox.getUserDialog(message, userImage)
         );
     }
 }

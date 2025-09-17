@@ -29,7 +29,7 @@ public class DeleteCommand extends BaseCommand {
      * <p>
      * Removes the specified task from the task list and shows a confirmation message.
      *
-     * @return Status code for {@link Command#DELETE}
+     * @return confirmation message of the deleted task to be displayed to the user
      * @throws InvalidIndexException If the provided index is out of range
      */
     @Override

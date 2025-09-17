@@ -17,12 +17,7 @@ public abstract class BaseCommand {
     /**
      * Executes this command.
      *
-     * @return Status code indicating the result of execution:
-     *         <ul>
-     *             <li>0 = exit chatbot</li>
-     *             <li>-1 = error occurred</li>
-     *             <li>other positive codes = continue running</li>
-     *         </ul>
+     * @return confirmation message to be displayed to the user
      * @throws ParseException If the input could not be parsed properly
      */
     public abstract String execute() throws ParseException;

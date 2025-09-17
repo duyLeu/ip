@@ -30,10 +30,14 @@ public enum Command {
     TODO("todo", "todo {task description}", 6),
 
     /** Add a deadline task with a due time. */
-    DEADLINE("deadline", "deadline {task description} /by {deadline time}", 7),
+    DEADLINE("deadline",
+            "deadline {task description} /by dd/mm/yyyy HHMM {deadline time}",
+            7),
 
     /** Add an event task with start and end times. */
-    EVENT("event", "event {task description} /from {start time} /by {end time}", 8),
+    EVENT("event",
+            "event {task description} /from dd/mm/yyyy HHMM {start time} /by dd/mm/yyyy HHMM {end time}",
+            8),
 
     /** Delete a task by its index. */
     DELETE("delete", "delete {task number}", 9),

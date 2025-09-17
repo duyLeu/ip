@@ -14,12 +14,12 @@ public class UiMessages {
                         | |  | || |__| || @ . o| | |\\  |    `_/      )
                         |_|  |_| \\____/  \\____/  |_| \\_|    (_(_/-(_/
                         """;
-        return String.format("%s\nWoof woof! I'm Moon! Your personal assistant! 🐾", logo);
+        return "Meooowww! I'm Moon! Your personal assistant!";
     }
 
     // display goodbye message when exit the bot
     public static String showExitMessage() {
-        return "Byeee! Hope to see you again! A-woooooooooooo! 🐾";
+        return "Byeee! Hope to see you again! Meooowww!";
     }
 
     // display prompting message when the chatbot wants to ask
@@ -27,29 +27,24 @@ public class UiMessages {
         return "How may I help you?";
     }
 
-    // print out the horizontal lines top and bottom of an answer
-    public String showLines() {
-        return "\t____________________________________________________________";
-    }
-
     public String showExceptionMessage(String s) {
         return s;
     }
 
     public String showGeneralErrorMessage() {
-        return "Sorryyy! I incurred some error while trying to add this task.\nWould you mind trying again? Woof!";
+        return "Sorryyy! I incurred some error while trying to add this task.\nWould you mind trying again? Meow!";
     }
 
     public String showLoadStorageSuccessfulMessage(TaskList list) {
-        return String.format("I have retrieved your previous task list!\n%s  Woof!", list);
+        return String.format("I have retrieved your previous task list!\n%s  Meow!", list);
     }
 
     public String showLoadStorageUnsuccessfulMessage() {
-        return "I couldn't retrieve your previous task. No worries! Let's start again! Woof!";
+        return "I couldn't retrieve your previous task. No worries! Let's start again! Meow!";
     }
 
     public String showEmptyInitialStorageMessage() {
-        return "Time to start tasking! A-wooooo!";
+        return "Time to start tasking! Meooowww!";
     }
 
     public String showAddTaskMessage(Task addedTask) {
@@ -62,9 +57,9 @@ public class UiMessages {
 
     public String showListMessage(TaskList list) {
         if (list.isEmpty()) {
-            return "You haven't added anything to your list yet. Time to start tasking! A-wooooo!";
+            return "You haven't added anything to your list yet. Time to start tasking! Meooowww!";
         } else {
-            return String.format("Here are the items in your list!\n%s  Woof!\n", list);
+            return String.format("Here are the items in your list!\n%s  Meow!\n", list);
         }
     }
 
@@ -79,20 +74,20 @@ public class UiMessages {
     }
 
     public String showMarkedSuccessfulMessage(Task markedTask) {
-        return String.format("Nicely done! I've pawed this as done! Woof!\n\t  %s\n",
+        return String.format("Nicely done! I've pawed this as done! Meow!\n\t  %s\n",
                 markedTask);
     }
 
     public String showUnmarkedSuccessfulMessage(Task unmarkedTask) {
-        return String.format("No worries! I've pawed this as not done! You can do it! Woof!\n  %s\n",
+        return String.format("No worries! I've pawed this as not done! You can do it! Meow!\n  %s\n",
                 unmarkedTask);
     }
 
     public String showTasksMatchedMessage(TaskList matchedTasks, String keyword) {
         if (matchedTasks.isEmpty()) {
-            return String.format("I can't find any tasks matching your keyword: %s . Wuf!\n", keyword);
+            return String.format("I can't find any tasks matching your keyword: %s . Meow:(\n", keyword);
         } else {
-            return String.format("I found these tasks matching your keyword!\n%s  Woof!\n", matchedTasks);
+            return String.format("I found these tasks matching your keyword!\n%s  Meow!\n", matchedTasks);
         }
     }
 }
