@@ -6,7 +6,7 @@ import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.util.FormatChecker;
 
 /**
- * Command to mark a {@link Task} in the task list as <b>not done</b>
+ * Command to mark a {@link Task} in the task list as <b>not done</b>.
  */
 public class UnmarkCommand extends BaseCommand {
     /** Associated command keyword and status code. */
@@ -32,20 +32,19 @@ public class UnmarkCommand extends BaseCommand {
      *   <li>If the task is successfully unmarked, a confirmation message is shown.</li>
      * </ul>
      *
-     * @return Status code for {@link Command#UNMARK}
+     * @return message of the unmarked task to be displayed to the user
      * @throws InvalidIndexException If the provided index is out of range
      */
     @Override
-    public int execute() throws InvalidIndexException {
+    public String execute() throws InvalidIndexException {
         FormatChecker.throwExceptionIfOutOfIndex(unmarkedIndex, getList());
         Task taskToUnmark = getList().get(unmarkedIndex);
 
         if (!taskToUnmark.isDone()) {
-            getUi().showAlreadyUnmarkedMessage(taskToUnmark);
+            return getUi().showAlreadyUnmarkedMessage(taskToUnmark);
         } else {
             taskToUnmark.setDone(false);
-            getUi().showUnmarkedSuccessfulMessage(taskToUnmark);
+            return getUi().showUnmarkedSuccessfulMessage(taskToUnmark);
         }
-        return COMMAND.getStatusCode();
     }
 }

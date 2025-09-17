@@ -23,15 +23,13 @@ public class AddDeadlineCommand extends AddCommand {
     }
 
     /**
-     * Adds the deadline to the task list, shows a confirmation message,
-     * and returns the associated status code.
+     * Adds the deadline to the task list and shows a confirmation message.
      *
-     * @return Status code for {@link Command#DEADLINE}
+     * @return confirmation message to be displayed to the user
      */
     @Override
-    public int execute() {
+    public String execute() {
         addToStorage(deadline);
-        getUi().showAddTaskMessage(deadline);
-        return COMMAND.getStatusCode();
+        return getUi().showAddTaskMessage(deadline);
     }
 }

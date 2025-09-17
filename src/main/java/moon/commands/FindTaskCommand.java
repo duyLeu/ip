@@ -1,8 +1,13 @@
 package moon.commands;
 
 import moon.commands.enums.Command;
+import moon.models.Task;
 import moon.models.TaskList;
 
+
+/**
+ * Command to find {@link Task} in the task list with matching names.
+ */
 public class FindTaskCommand extends BaseCommand {
     private static final Command COMMAND = Command.FIND;
     private final String keyword;
@@ -11,9 +16,14 @@ public class FindTaskCommand extends BaseCommand {
         this.keyword = keyword;
     }
 
-    public int execute() {
+    /**
+     * Executes the find task command to find all the tasks with
+     * matching name in the task list.
+     *
+     * @return list of tasks found to be displayed to the user
+     */
+    public String execute() {
         TaskList matchingTasks = this.getList().findByName(this.keyword);
-        this.getUi().showTasksMatchedMessage(matchingTasks, this.keyword);
-        return COMMAND.getStatusCode();
+        return getUi().showTasksMatchedMessage(matchingTasks, this.keyword);
     }
 }

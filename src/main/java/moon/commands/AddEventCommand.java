@@ -23,15 +23,13 @@ public class AddEventCommand extends AddCommand {
     }
 
     /**
-     * Adds the event to the task list, shows a confirmation message,
-     * and returns the associated status code.
+     * Adds the event to the task list and shows a confirmation message.
      *
-     * @return Status code for {@link Command#EVENT}
+     * @return confirmation message to be displayed to the user
      */
     @Override
-    public int execute() {
+    public String execute() {
         addToStorage(event);
-        getUi().showAddTaskMessage(event);
-        return COMMAND.getStatusCode();
+        return getUi().showAddTaskMessage(event);
     }
 }

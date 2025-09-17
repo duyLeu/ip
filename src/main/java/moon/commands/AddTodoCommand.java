@@ -23,15 +23,13 @@ public class AddTodoCommand extends AddCommand {
     }
 
     /**
-     * Adds the todo to the task list, shows a confirmation message,
-     * and returns the associated status code.
+     * Adds the todo to the task list and shows a confirmation message.
      *
-     * @return Status code for {@link Command#TODO}
+     * @return confirmation message to be displayed to the user
      */
     @Override
-    public int execute() {
+    public String execute() {
         addToStorage(todo);
-        getUi().showAddTaskMessage(todo);
-        return COMMAND.getStatusCode();
+        return getUi().showAddTaskMessage(todo);
     }
 }

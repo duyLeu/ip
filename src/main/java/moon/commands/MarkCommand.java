@@ -6,7 +6,7 @@ import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.util.FormatChecker;
 
 /**
- * Command to mark a {@link Task} in the task list as <b>done</b>
+ * Command to mark a {@link Task} in the task list as <b>done</b>.
  */
 public class MarkCommand extends BaseCommand {
     /** Associated command keyword and status code. */
@@ -32,20 +32,19 @@ public class MarkCommand extends BaseCommand {
      *   <li>If the task is successfully marked, a confirmation message is shown.</li>
      * </ul>
      *
-     * @return Status code for {@link Command#MARK}
+     * @return message of the marked task to be displayed to the user
      * @throws InvalidIndexException If the provided index is out of range
      */
     @Override
-    public int execute() throws InvalidIndexException {
+    public String execute() throws InvalidIndexException {
         FormatChecker.throwExceptionIfOutOfIndex(markedIndex, getList());
         Task taskToMark = getList().get(markedIndex);
 
         if (taskToMark.isDone()) {
-            getUi().showAlreadyMarkedMessage(taskToMark);
+            return getUi().showAlreadyMarkedMessage(taskToMark);
         } else {
             taskToMark.setDone(true);
-            getUi().showMarkedSuccessfulMessage(taskToMark);
+            return getUi().showMarkedSuccessfulMessage(taskToMark);
         }
-        return COMMAND.getStatusCode();
     }
 }
