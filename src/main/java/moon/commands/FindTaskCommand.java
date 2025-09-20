@@ -3,6 +3,7 @@ package moon.commands;
 import moon.commands.enums.Command;
 import moon.models.Task;
 import moon.models.TaskList;
+import moon.ui.UiMessages;
 
 
 /**
@@ -24,6 +25,6 @@ public class FindTaskCommand extends BaseCommand {
      */
     public String execute() {
         TaskList matchingTasks = this.getList().findByName(this.keyword);
-        return getUi().showTasksMatchedMessage(matchingTasks, this.keyword);
+        return UiMessages.showTasksMatchedMessage(matchingTasks, this.keyword);
     }
 }

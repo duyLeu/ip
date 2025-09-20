@@ -6,7 +6,28 @@ import moon.parser.exceptions.EmptyArgumentException;
 import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.exceptions.ParseException;
 
+/**
+ * Utility class that provides validation checks for command formats and arguments.
+ * <p>
+ * Used by the parser layer to ensure user input adheres to the expected syntax
+ * before command execution.
+ */
 public class FormatChecker {
+
+    /**
+     * Validates that the number of parameters for a command matches its expected format.
+     * <p>
+     * Expected number of parameters:
+     * <ul>
+     *   <li>{@link Command#TODO} → 1</li>
+     *   <li>{@link Command#DEADLINE} → 2</li>
+     *   <li>{@link Command#EVENT} → 3</li>
+     * </ul>
+     *
+     * @param inputList the split user input
+     * @param command   the command being validated
+     * @throws ParseException if the number of parameters is less or more than expected
+     */
     public static void checkCommandFormat(String[] inputList, Command command) throws ParseException {
         int numOfParameters = switch (command) {
         case TODO -> 1;
@@ -25,6 +46,16 @@ public class FormatChecker {
         }
     }
 
+    /**
+     * Validates that the argument for a task or time is not empty.
+     *
+     * @param inputString the full user input string
+     * @param command     the command being validated
+     * @param isTaskName  true if checking for an empty task name,
+     *                    false if checking for a time argument
+     * @throws EmptyArgumentException if the required argument is empty
+     * @throws ParseException         if the command type is unsupported
+     */
     public static void checkEmptyParameter(String inputString, Command command, boolean isTaskName)
             throws ParseException {
         String exceptionMessage = isTaskName
@@ -38,11 +69,18 @@ public class FormatChecker {
 
         if (inputString.split(" ").length <= 1) {
             System.out.println(inputString);
-            throw new EmptyArgumentException(command,
-                    exceptionMessage);
+            throw new EmptyArgumentException(command, exceptionMessage);
         }
     }
 
+    /**
+     * Validates that an input keyword matches the expected keyword for a command.
+     *
+     * @param actualInput   the keyword provided by the user
+     * @param expectedInput the expected keyword
+     * @param command       the command being validated
+     * @throws ParseException if the actual keyword does not match the expected one
+     */
     public static void checkKeyword(String actualInput, String expectedInput, Command command) throws ParseException {
         if (!actualInput.equals(expectedInput)) {
             throw new ParseException(command,
@@ -50,8 +88,15 @@ public class FormatChecker {
         }
     }
 
+    /**
+     * Throws an exception if the given index is out of bounds for the task list.
+     *
+     * @param index the index to check
+     * @param list  the task list being accessed
+     * @throws InvalidIndexException if the index is negative or greater than/equal to the list size
+     */
     public static void throwExceptionIfOutOfIndex(int index, TaskList list) throws InvalidIndexException {
-        if (index < 0 || index >= list.size()) { // check for index range
+        if (index < 0 || index >= list.size()) {
             throw new InvalidIndexException(Command.DELETE,
                     "Wuf! Your index is out of range!");
         }

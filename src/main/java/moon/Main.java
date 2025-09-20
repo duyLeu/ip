@@ -11,9 +11,21 @@ import javafx.stage.Stage;
 import moon.logic.Moon;
 import moon.ui.MainWindow;
 
+/**
+ * Main JavaFX application class.
+ * <p>
+ * Loads the FXML layout, wires it to the {@link MainWindow} controller,
+ * and injects the {@link Moon} chatbot instance. Also sets up the primary stage.
+ */
 public class Main extends Application {
     private final Moon moon = new Moon();
 
+    /**
+     * Starts the JavaFX application by loading {@code MainWindow.fxml},
+     * attaching the controller, and showing the primary stage.
+     *
+     * @param stage the primary JavaFX stage
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -22,7 +34,7 @@ public class Main extends Application {
 
             AnchorPane root = fxmlLoader.load();
             MainWindow controller = fxmlLoader.getController();
-            controller.setMoon(moon); // inject the Moon instance
+            controller.setMoon(moon); // inject chatbot logic
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -37,5 +49,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 }

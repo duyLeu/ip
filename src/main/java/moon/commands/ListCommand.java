@@ -2,6 +2,7 @@ package moon.commands;
 
 import moon.commands.enums.Command;
 import moon.models.Task;
+import moon.ui.UiMessages;
 
 /**
  * Command to find a {@link Task} in the task list.
@@ -17,6 +18,6 @@ public class ListCommand extends BaseCommand {
      */
     @Override
     public String execute() {
-        return getUi().showListMessage(getList());
+        return UiMessages.showListMessage(getList());
     }
 }

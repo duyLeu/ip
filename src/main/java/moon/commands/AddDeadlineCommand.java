@@ -2,6 +2,7 @@ package moon.commands;
 
 import moon.commands.enums.Command;
 import moon.models.Deadline;
+import moon.ui.UiMessages;
 
 /**
  * Command to add a {@link Deadline} task to the task list.
@@ -30,6 +31,6 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public String execute() {
         addToStorage(deadline);
-        return getUi().showAddTaskMessage(deadline);
+        return UiMessages.showAddTaskMessage(deadline);
     }
 }

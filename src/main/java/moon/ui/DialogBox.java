@@ -16,19 +16,25 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
+ * A chat bubble with an avatar and a text label.
+ * <p>
+ * Loaded via FXML and used by {@link MainWindow} for both user and bot messages.
+ * The user bubble keeps the avatar on the right; the bot bubble is flipped so the avatar is on the left.
  */
 public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
-    @FXML
-    private ImageView displayPicture;
+    @FXML private Label dialog;
+    @FXML private ImageView displayPicture;
 
+    /**
+     * Creates a dialog bubble showing the given text and image.
+     * The FXML is loaded and injected before UI properties are set.
+     *
+     * @param text message text for the bubble
+     * @param img  avatar image
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
-
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -39,12 +45,12 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setWrapText(true);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
-        dialog.maxWidthProperty().bind(this.widthProperty().subtract(100));
+        dialog.maxWidthProperty().bind(this.widthProperty().subtract(100)); // leave room for avatar/padding
         displayPicture.setImage(img);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips order so avatar is on the left and text on the right; also applies a reply style.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -54,10 +60,16 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
+    /**
+     * Factory for a user dialog bubble.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Factory for a bot dialog bubble. The bubble is flipped so the avatar appears on the left.
+     */
     public static DialogBox getMoonDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

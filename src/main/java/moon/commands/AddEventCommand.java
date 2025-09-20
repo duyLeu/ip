@@ -2,6 +2,7 @@ package moon.commands;
 
 import moon.commands.enums.Command;
 import moon.models.Event;
+import moon.ui.UiMessages;
 
 /**
  * Command to add an {@link Event} task to the task list.
@@ -30,6 +31,6 @@ public class AddEventCommand extends AddCommand {
     @Override
     public String execute() {
         addToStorage(event);
-        return getUi().showAddTaskMessage(event);
+        return UiMessages.showAddTaskMessage(event);
     }
 }

@@ -17,7 +17,6 @@ import moon.ui.UiMessages;
  */
 public class Moon {
     private static final String DEFAULT_FILEPATH = "src/data/storage.txt";
-    protected final UiMessages uiMessages;
     private final String filepath;
     private Storage storage;
     private TaskList taskList;
@@ -28,7 +27,6 @@ public class Moon {
      * @param filepath Path to the storage file
      */
     public Moon(String filepath) {
-        this.uiMessages = new UiMessages();
         this.filepath = filepath;
     }
 
@@ -62,13 +60,13 @@ public class Moon {
             taskList = storage.load();
 
             if (taskList.isEmpty()) {
-                return uiMessages.showEmptyInitialStorageMessage();
+                return UiMessages.showEmptyInitialStorageMessage();
             } else {
-                return uiMessages.showLoadStorageSuccessfulMessage(this.taskList);
+                return UiMessages.showLoadStorageSuccessfulMessage(this.taskList);
             }
         } catch (IOException | MoonException e) {
             taskList = new TaskList();
-            return uiMessages.showLoadStorageUnsuccessfulMessage();
+            return UiMessages.showLoadStorageUnsuccessfulMessage();
         }
     }
 
@@ -82,17 +80,17 @@ public class Moon {
     public String processUserInput(String userInput) {
         try {
             BaseCommand c = UserInputParser.parse(userInput);
-            c.setMetaData(this.taskList, this.uiMessages);
+            c.setMetaData(this.taskList);
             String response = c.execute();
             this.storage.rewrite(this.taskList);
 
             return response;
         } catch (MoonException e) {
             // exceptions returned by parser/commands
-            return uiMessages.showExceptionMessage(e.getMessage());
+            return UiMessages.showExceptionMessage(e.getMessage());
         } catch (NoSuchElementException | IOException e) {
             // exceptions returned by scanner or storage
-            return uiMessages.showGeneralErrorMessage();
+            return UiMessages.showGeneralErrorMessage();
         }
     }
 

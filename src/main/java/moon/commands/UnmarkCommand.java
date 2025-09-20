@@ -4,6 +4,7 @@ import moon.commands.enums.Command;
 import moon.models.Task;
 import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.util.FormatChecker;
+import moon.ui.UiMessages;
 
 /**
  * Command to mark a {@link Task} in the task list as <b>not done</b>.
@@ -41,10 +42,10 @@ public class UnmarkCommand extends BaseCommand {
         Task taskToUnmark = getList().get(unmarkedIndex);
 
         if (!taskToUnmark.isDone()) {
-            return getUi().showAlreadyUnmarkedMessage(taskToUnmark);
+            return UiMessages.showAlreadyUnmarkedMessage(taskToUnmark);
         } else {
             taskToUnmark.setDone(false);
-            return getUi().showUnmarkedSuccessfulMessage(taskToUnmark);
+            return UiMessages.showUnmarkedSuccessfulMessage(taskToUnmark);
         }
     }
 }

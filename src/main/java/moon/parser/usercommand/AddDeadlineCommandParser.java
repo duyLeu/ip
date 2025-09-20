@@ -9,14 +9,32 @@ import moon.parser.util.DateTimeParser;
 import moon.parser.util.ExtractString;
 import moon.parser.util.FormatChecker;
 
+/**
+ * Parser for the {@link Command#DEADLINE} command.
+ * <p>
+ * Expected format:
+ * <pre>
+ *   deadline {description} /by {deadline time}
+ * </pre>
+ * Example:
+ * <pre>
+ *   deadline return book /by 25/12/2025 1800
+ * </pre>
+ */
 public class AddDeadlineCommandParser implements CommandParser<AddDeadlineCommand> {
     private static final Command COMMAND = Command.DEADLINE;
     private static final String PREFIX_BY = "by";
 
+    /**
+     * Parses a user input string into an {@link AddDeadlineCommand}.
+     *
+     * @param input the raw user input
+     * @return an {@link AddDeadlineCommand} containing the new {@link Deadline}
+     * @throws ParseException if the input is malformed
+     *                        (e.g. missing description, missing "/by" keyword, or invalid date/time format)
+     */
     @Override
-    // function that parse the string input to initialize a new Deadline object
     public AddDeadlineCommand parse(String input) throws ParseException {
-        // split the string by the " /" separator into, supposedly, two parts: description, and deadline
         String[] inputList = input.split(" /");
 
         FormatChecker.checkEmptyParameter(inputList[0], COMMAND, true);
@@ -31,6 +49,7 @@ public class AddDeadlineCommandParser implements CommandParser<AddDeadlineComman
         MoonDateTime deadlineTime = DateTimeParser.parse(
                 ExtractString.extract(inputList[1], PREFIX_BY),
                 false);
+
         Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
         return new AddDeadlineCommand(newDeadline);
     }

@@ -2,7 +2,6 @@ package moon.commands;
 
 import moon.models.TaskList;
 import moon.parser.exceptions.ParseException;
-import moon.ui.UiMessages;
 
 /**
  * Abstract base class for all commands in the Moon chatbot.
@@ -12,7 +11,6 @@ import moon.ui.UiMessages;
  */
 public abstract class BaseCommand {
     private TaskList list;
-    private UiMessages uiMessages;
 
     /**
      * Executes this command.
@@ -26,11 +24,9 @@ public abstract class BaseCommand {
      * Sets metadata needed by this command before execution.
      *
      * @param list The current task list
-     * @param uiMessages   The UI instance for interaction
      */
-    public void setMetaData(TaskList list, UiMessages uiMessages) {
+    public void setMetaData(TaskList list) {
         this.list = list;
-        this.uiMessages = uiMessages;
     }
 
     /**
@@ -40,14 +36,5 @@ public abstract class BaseCommand {
      */
     public TaskList getList() {
         return this.list;
-    }
-
-    /**
-     * Returns the UI instance associated with this command.
-     *
-     * @return UI
-     */
-    public UiMessages getUi() {
-        return this.uiMessages;
     }
 }

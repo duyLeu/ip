@@ -13,50 +13,52 @@ import javafx.util.Duration;
 import moon.logic.Moon;
 
 /**
- * Controller for the main GUI.
+ * JavaFX controller for the main chat window.
+ * <p>
+ * Manages message flow between the text field and the {@link Moon} logic, and renders
+ * conversation bubbles into a scrollable container.
  */
 public class MainWindow extends AnchorPane {
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox dialogContainer;
-    @FXML
-    private TextField userInput;
-    @FXML
-    private Button sendButton;
+    @FXML private ScrollPane scrollPane;
+    @FXML private VBox dialogContainer;
+    @FXML private TextField userInput;
+    @FXML private Button sendButton;
 
     private Moon moon;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserPic.jpg"));
-    private Image moonImage = new Image(this.getClass().getResourceAsStream("/images/BotPic.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserPic.jpg"));
+    private final Image moonImage = new Image(this.getClass().getResourceAsStream("/images/BotPic.jpg"));
 
+    /**
+     * Initializes scrolling and width behavior after FXML injection.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
-        // Ensure children can use full width so maxWidth on the Label matters
         dialogContainer.setFillWidth(true);
         scrollPane.setFitToWidth(true);
     }
 
-    /** Injects the Moon instance */
+    /** Injects the {@link Moon} chatbot instance. */
     public void setMoon(Moon moon) {
         this.moon = moon;
     }
 
+    /** Shows the initial greeting from the bot and focuses the input field. */
     public void showGreeting() {
         addMoonMessage(UiMessages.showGreetingMessage());
         userInput.requestFocus();
     }
 
+    /** Shows the storage load result (success/empty/failure). */
     public void showInitialStorage() {
         addMoonMessage(moon.initiateStorage());
         userInput.requestFocus();
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Moon's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles a user submission: renders the user message, obtains the bot response,
+     * renders it, and optionally exits after the farewell.
      */
     @FXML
     private void handleUserInput() {
@@ -66,8 +68,6 @@ public class MainWindow extends AnchorPane {
         if (moon.isExitCommand(input)) {
             addUserMessage(input);
             addMoonMessage(UiMessages.showExitMessage());
-
-            // delay without blocking UI, then exit
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(e -> Platform.exit());
             pause.play();
@@ -77,26 +77,18 @@ public class MainWindow extends AnchorPane {
         addUserMessage(input);
         addMoonMessage(response);
         addMoonMessage(UiMessages.showAskingMessage());
-
         userInput.clear();
     }
 
-    /**
-     * Adds a message from the bot into the dialog container.
-     */
+    /** Appends a bot message bubble to the dialog container. */
     public void addMoonMessage(String message) {
         dialogContainer.getChildren().add(
-                DialogBox.getMoonDialog(message, moonImage) // custom class with avatar/bubble
-        );
+                DialogBox.getMoonDialog(message, moonImage));
     }
 
-    /**
-     * Adds a message from the user into the dialog container.
-     */
+    /** Appends a user message bubble to the dialog container. */
     public void addUserMessage(String message) {
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(message, userImage)
-        );
+                DialogBox.getUserDialog(message, userImage));
     }
 }
-

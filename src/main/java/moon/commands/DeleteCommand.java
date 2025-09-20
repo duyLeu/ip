@@ -4,6 +4,7 @@ import moon.commands.enums.Command;
 import moon.models.Task;
 import moon.parser.exceptions.InvalidIndexException;
 import moon.parser.util.FormatChecker;
+import moon.ui.UiMessages;
 
 /**
  * Command to delete a {@link Task} task from the task list.
@@ -36,6 +37,6 @@ public class DeleteCommand extends BaseCommand {
     public String execute() throws InvalidIndexException {
         FormatChecker.throwExceptionIfOutOfIndex(deletedIndex, getList());
         Task deletedTask = this.getList().delete(deletedIndex);
-        return getUi().showDeleteTaskMessage(deletedTask);
+        return UiMessages.showDeleteTaskMessage(deletedTask);
     }
 }

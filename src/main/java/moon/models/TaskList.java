@@ -73,13 +73,23 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    /**
+     * Finds all tasks whose names contain the given substring, ignoring case.
+     * <p>
+     * If the search string is empty, an empty {@link TaskList} is returned.
+     * Matching is done using {@link String#toLowerCase()} on both the task name and the query.
+     *
+     * @param s the substring to search for
+     * @return a new {@link TaskList} containing all tasks whose names include {@code s}, case-insensitive
+     */
     public TaskList findByName(String s) {
         if (s.isEmpty()) {
             return new TaskList();
         }
+        String query = s.toLowerCase();
         TaskList tempList = new TaskList();
         this.tasks.stream()
-                .filter(task -> task.getName().contains(s))
+                .filter(task -> task.getName().toLowerCase().contains(query))
                 .forEach(tempList::add);
         return tempList;
     }

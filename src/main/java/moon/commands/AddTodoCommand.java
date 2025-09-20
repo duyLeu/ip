@@ -2,6 +2,7 @@ package moon.commands;
 
 import moon.commands.enums.Command;
 import moon.models.Todo;
+import moon.ui.UiMessages;
 
 /**
  * Command to add a {@link Todo} task to the task list.
@@ -30,6 +31,6 @@ public class AddTodoCommand extends AddCommand {
     @Override
     public String execute() {
         addToStorage(todo);
-        return getUi().showAddTaskMessage(todo);
+        return UiMessages.showAddTaskMessage(todo);
     }
 }

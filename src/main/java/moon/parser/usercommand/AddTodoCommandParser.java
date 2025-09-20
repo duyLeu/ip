@@ -7,11 +7,29 @@ import moon.parser.exceptions.ParseException;
 import moon.parser.util.ExtractString;
 import moon.parser.util.FormatChecker;
 
+/**
+ * Parser for the {@link Command#TODO} command.
+ * <p>
+ * Expected format:
+ * <pre>
+ *   todo {task description}
+ * </pre>
+ * Example:
+ * <pre>
+ *   todo read book
+ * </pre>
+ */
 public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
-    private static final Command COMMAND = Command.EVENT;
+    private static final Command COMMAND = Command.TODO;
 
+    /**
+     * Parses a user input string into an {@link AddTodoCommand}.
+     *
+     * @param input the raw user input
+     * @return an {@link AddTodoCommand} containing the new {@link Todo}
+     * @throws ParseException if the task description is missing or empty
+     */
     @Override
-    // function that parse the string input to initialize a new To-do object
     public AddTodoCommand parse(String input) throws ParseException {
         FormatChecker.checkEmptyParameter(input, COMMAND, false);
 
