@@ -14,9 +14,6 @@ import java.util.stream.Stream;
  * </ul>
  */
 public enum Command {
-    /** Exit the chatbot. */
-    EXIT("bye", "bye", 0),
-
     /** List all current tasks. */
     LIST("list", "list", 2),
 

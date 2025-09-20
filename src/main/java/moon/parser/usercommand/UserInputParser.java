@@ -10,7 +10,6 @@ public class UserInputParser {
         Command command = findMatchingCommand(input);
         // switch-case structure for better readability
         CommandParser<? extends BaseCommand> p = switch (command) {
-        case EXIT -> new ExitCommandParser();
         case LIST -> new ListCommandParser();
         case MARK -> new MarkCommandParser();
         case UNMARK -> new UnmarkCommandParser();

@@ -32,12 +32,18 @@ public class Moon {
         this.filepath = filepath;
     }
 
+    /**
+     * Creates a new Moon chatbot using the default storage file path.
+     */
     public Moon() {
         this(DEFAULT_FILEPATH);
     }
 
     /**
-     * Generates a response for the user's chat message.
+     * Generates a chatbot response for the user's message.
+     *
+     * @param input the raw text entered by the user
+     * @return the chatbot's reply as a string
      */
     public String getResponse(String input) {
         return processUserInput(input);
@@ -45,7 +51,10 @@ public class Moon {
 
     /**
      * Initialises the storage and loads tasks from file.
-     * If loading fails, starts with an empty task list.
+     * <p>
+     * If loading fails, a new empty task list is created instead.
+     *
+     * @return a message indicating whether the storage was loaded successfully
      */
     public String initiateStorage() {
         try {
@@ -63,25 +72,36 @@ public class Moon {
         }
     }
 
+    /**
+     * Processes a user input string by parsing it into a command,
+     * executing the command, and updating the storage.
+     *
+     * @param userInput the text input entered by the user
+     * @return the response message to display to the user
+     */
     public String processUserInput(String userInput) {
         try {
-            // parse the user input, then send the meta-data, including the task list
-            // and the UI, execute the command, which will return a status code.
-            // Then rewrite the storage.txt file using the new, modified task list
-            // (Not the most efficient solution, but for small amount of data, it is acceptable)
             BaseCommand c = UserInputParser.parse(userInput);
             c.setMetaData(this.taskList, this.uiMessages);
             String response = c.execute();
             this.storage.rewrite(this.taskList);
 
             return response;
-        } catch (MoonException e) { // exceptions returned by parser/commands
+        } catch (MoonException e) {
+            // exceptions returned by parser/commands
             return uiMessages.showExceptionMessage(e.getMessage());
-        } catch (NoSuchElementException | IOException e) { // exceptions returned by scanner or storage
+        } catch (NoSuchElementException | IOException e) {
+            // exceptions returned by scanner or storage
             return uiMessages.showGeneralErrorMessage();
         }
     }
 
+    /**
+     * Checks whether the given message is an exit command.
+     *
+     * @param message the user input to check
+     * @return true if the message equals "bye" (case-insensitive), false otherwise
+     */
     public boolean isExitCommand(String message) {
         return message.equalsIgnoreCase("bye");
     }
