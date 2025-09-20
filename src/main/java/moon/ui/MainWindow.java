@@ -1,5 +1,6 @@
 package moon.ui;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import moon.logic.Moon;
 
 /**
@@ -62,20 +64,18 @@ public class MainWindow extends AnchorPane {
         String response = this.moon.getResponse(input);
 
         if (moon.isExitCommand(input)) {
-            try {
-                addMoonMessage(UiMessages.showExitMessage());
-                Thread.sleep(3000); // Delay of 3 seconds before quitting
-            } catch (InterruptedException e) {
-                // Handle the InterruptedException if the thread is interrupted while sleeping
-                Thread.currentThread().interrupt(); // Restore the interrupted status
-                System.err.println("Thread interrupted during sleep: " + e.getMessage());
-            }
-            Platform.exit(); // cleanly shuts down JavaFX
+            addUserMessage(input);
+            addMoonMessage(UiMessages.showExitMessage());
+
+            // delay without blocking UI, then exit
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(e -> Platform.exit());
+            pause.play();
+            return;
         }
 
         addUserMessage(input);
         addMoonMessage(response);
-
         addMoonMessage(UiMessages.showAskingMessage());
 
         userInput.clear();
