@@ -74,7 +74,9 @@ public class Storage {
         TaskList tasks = new TaskList();
         for (String line : lines) {
             if (!line.isBlank()) {
-                tasks.add(AddFromStorageParser.parse(line));
+                Task t = AddFromStorageParser.parse(line);
+                assert t != null : "Parsed task should not be null";
+                tasks.add(t);
             }
         }
         return tasks;

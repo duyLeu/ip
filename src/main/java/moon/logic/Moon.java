@@ -80,6 +80,8 @@ public class Moon {
     public String processUserInput(String userInput) {
         try {
             BaseCommand c = UserInputParser.parse(userInput);
+            assert c != null : "Parser must return a non-null command.";
+
             c.setMetaData(this.taskList);
             String response = c.execute();
             this.storage.rewrite(this.taskList);

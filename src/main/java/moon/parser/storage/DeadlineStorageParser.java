@@ -24,9 +24,10 @@ public class DeadlineStorageParser implements StorageParser<Deadline> {
     public Deadline parse(String[] inputs) throws ParseException {
         String name = inputs[2];
         boolean done = inputs[1].equals("1");
-        MoonDateTime byTime = DateTimeParser.parse(inputs[3], true);
+        MoonDateTime deadlineTime = DateTimeParser.parse(inputs[3], true);
+        assert deadlineTime != null : "DateTimeParser should always return a MoonDateTime or throw";
 
-        Deadline deadline = new Deadline(name, byTime);
+        Deadline deadline = new Deadline(name, deadlineTime);
         deadline.setDone(done);
         return deadline;
     }

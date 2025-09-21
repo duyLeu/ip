@@ -49,6 +49,7 @@ public class AddDeadlineCommandParser implements CommandParser<AddDeadlineComman
         MoonDateTime deadlineTime = DateTimeParser.parse(
                 ExtractString.extract(inputList[1], PREFIX_BY),
                 false);
+        assert deadlineTime != null : "DateTimeParser should always return a MoonDateTime or throw";
 
         Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
         return new AddDeadlineCommand(newDeadline);
