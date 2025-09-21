@@ -55,6 +55,8 @@ public class AddEventCommandParser implements CommandParser<AddEventCommand> {
         MoonDateTime toTime = DateTimeParser.parse(
                 ExtractString.extract(inputList[2], PREFIX_TO),
                 false);
+        assert fromTime != null && toTime != null: "DateTimeParser should always return a MoonDateTime or throw";
+
 
         Event newEvent = new Event(eventName, fromTime, toTime);
         return new AddEventCommand(newEvent);

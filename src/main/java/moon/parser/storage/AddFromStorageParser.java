@@ -26,7 +26,6 @@ public class AddFromStorageParser {
      */
     public static Task parse(String input) throws ParseException {
         String[] inputList = input.split(" \\| ");
-        System.out.println(Arrays.toString(inputList));
         StorageParser<? extends Task> p = switch (inputList[0]) {
         case "T" -> new TodoStorageParser();
         case "D" -> new DeadlineStorageParser();

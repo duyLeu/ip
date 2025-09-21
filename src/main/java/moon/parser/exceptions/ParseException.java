@@ -70,6 +70,10 @@ public class ParseException extends MoonException {
 
     @Override
     public String getMessage() {
-        return super.getMessage();
+        if (command != null) {
+            return super.getMessage() + " You should follow this correct syntax: " + command.getFormat();
+        } else {
+            return super.getMessage();
+        }
     }
 }
