@@ -34,15 +34,15 @@ public class FormatChecker {
         case DEADLINE -> 2;
         case EVENT -> 3;
         default -> throw new ParseException(command,
-                "Wuf! Are you sure you have the correct command?");
+                "Meow! Are you sure you have the correct command?");
         };
 
         if (inputList.length < numOfParameters) {
             throw new ParseException(command,
-                    "Wuf! Are you missing a dash '/' or a command somewhere?");
+                    "Meow! Are you missing a dash '/' or a command somewhere?");
         } else if (inputList.length > numOfParameters) {
             throw new ParseException(command,
-                    "Wuf! Are you sure you have the correct command?");
+                    "Meow! Are you sure you have the correct command?");
         }
     }
 
@@ -61,13 +61,13 @@ public class FormatChecker {
         String exceptionMessage;
 
         if (isTaskName) {
-            exceptionMessage = "Wuf! Your task name cannot be empty!";
+            exceptionMessage = "Meow! Your task name cannot be empty!";
         } else {
             exceptionMessage = switch (command) {
-            case DEADLINE -> "Wuf! Your deadline time cannot be empty!";
-            case EVENT -> "Wuf! Both your start and end time cannot be empty!";
+            case DEADLINE -> "Meow! Your deadline time cannot be empty!";
+            case EVENT -> "Meow! Both your start and end time cannot be empty!";
             default -> throw new ParseException(command,
-                    "Wuf! Are you sure you have the correct command?");
+                    "Meow! Are you sure you have the correct command?");
             };
         }
 
@@ -88,7 +88,7 @@ public class FormatChecker {
     public static void checkKeyword(String actualInput, String expectedInput, Command command) throws ParseException {
         if (!actualInput.equals(expectedInput)) {
             throw new ParseException(command,
-                    String.format("Wuf! I think you make a mistake here: '%s'", actualInput));
+                    String.format("Meow! I think you make a mistake here: '%s'.", actualInput));
         }
     }
 
@@ -102,7 +102,7 @@ public class FormatChecker {
     public static void throwExceptionIfOutOfIndex(int index, TaskList list) throws InvalidIndexException {
         if (index < 0 || index >= list.size()) {
             throw new InvalidIndexException(Command.DELETE,
-                    "Wuf! Your index is out of range!");
+                    "Meow! Your index is out of range!");
         }
     }
 }

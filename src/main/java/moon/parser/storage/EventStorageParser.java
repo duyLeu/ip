@@ -26,7 +26,7 @@ public class EventStorageParser implements StorageParser<Event> {
         boolean done = inputs[1].equals("1");
         MoonDateTime fromTime = DateTimeParser.parse(inputs[3], true);
         MoonDateTime toTime = DateTimeParser.parse(inputs[4], true);
-        assert fromTime != null && toTime != null: "DateTimeParser should always return a MoonDateTime or throw";
+        assert fromTime != null && toTime != null : "DateTimeParser should always return a MoonDateTime or throw";
 
         Event event = new Event(name, fromTime, toTime);
         event.setDone(done);

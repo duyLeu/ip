@@ -1,8 +1,10 @@
 package moon.commands;
 
+import java.util.List;
+
 import moon.commands.enums.Command;
 import moon.models.Task;
-import moon.models.TaskList;
+import moon.models.TaskMatch;
 import moon.ui.UiMessages;
 
 
@@ -24,7 +26,7 @@ public class FindTaskCommand extends BaseCommand {
      * @return list of tasks found to be displayed to the user
      */
     public String execute() {
-        TaskList matchingTasks = this.getList().findByName(this.keyword);
+        List<TaskMatch> matchingTasks = this.getList().findByName(this.keyword);
         return UiMessages.showTasksMatchedMessage(matchingTasks, this.keyword);
     }
 }

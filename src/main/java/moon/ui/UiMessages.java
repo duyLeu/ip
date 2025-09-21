@@ -1,7 +1,10 @@
 package moon.ui;
 
+import java.util.List;
+
 import moon.models.Task;
 import moon.models.TaskList;
+import moon.models.TaskMatch;
 
 /**
  * Centralized message templates used by the GUI and logic.
@@ -100,11 +103,12 @@ public final class UiMessages {
     }
 
     /** @return a message listing matched tasks for a keyword, or a miss message if empty */
-    public static String showTasksMatchedMessage(TaskList matchedTasks, String keyword) {
+    public static String showTasksMatchedMessage(List<TaskMatch> matchedTasks, String keyword) {
         if (matchedTasks.isEmpty()) {
             return String.format("I can't find any tasks matching your keyword: %s . Meow:(\n", keyword);
         } else {
-            return String.format("I found these tasks matching your keyword!\n%s  Meow!\n", matchedTasks);
+            return String.format("I found these tasks matching your keyword!\n%s  Meow!\n",
+                    TaskList.formatTaskMatchList(matchedTasks));
         }
     }
 }

@@ -1,6 +1,9 @@
 package moon.models;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Represents a list of {@link Task} objects.
@@ -78,22 +81,48 @@ public class TaskList {
     /**
      * Finds all tasks whose names contain the given substring, ignoring case.
      * <p>
-     * If the search string is empty, an empty {@link TaskList} is returned.
-     * Matching is done using {@link String#toLowerCase()} on both the task name and the query.
+     * This method returns a list of {@link TaskMatch} objects, where each match
+     * contains both the original 1-based index of the task in the list and the task itself.
+     * <ul>
+     *   <li>If the search string is empty, an empty list is returned.</li>
+     *   <li>Matching is performed case-insensitively by converting both the
+     *   task name and the query to lowercase.</li>
+     * </ul>
      *
      * @param s the substring to search for
-     * @return a new {@link TaskList} containing all tasks whose names include {@code s}, case-insensitive
+     * @return a list of {@link TaskMatch} objects representing tasks whose names include {@code s}
      */
-    public TaskList findByName(String s) {
-        if (s.isEmpty()) {
-            return new TaskList();
-        }
+    public List<TaskMatch> findByName(String s) {
         String query = s.toLowerCase();
-        TaskList tempList = new TaskList();
-        this.tasks.stream()
-                .filter(task -> task.getName().toLowerCase().contains(query))
-                .forEach(tempList::add);
-        return tempList;
+        List<TaskMatch> matches = new ArrayList<>();
+
+        if (s.isEmpty()) {
+            return matches;
+        }
+
+        return IntStream.range(0, this.size())
+                .filter(i -> this.get(i).getName().toLowerCase().contains(query))
+                .mapToObj(i -> new TaskMatch(i + 1, tasks.get(i)))
+                .toList();
+    }
+
+    /**
+     * Formats a list of {@link TaskMatch} objects into a user-readable string.
+     * <p>
+     * Each task is displayed on its own line, showing its original index
+     * and the task details (via {@link TaskMatch#toString()}).
+     * If no matches are provided, a default "not found" message is returned.
+     *
+     * @param matches the list of matches to format
+     * @return a formatted string representation of the matches, or a "not found" message if empty
+     */
+    public static String formatTaskMatchList(List<TaskMatch> matches) {
+        if (matches.isEmpty()) {
+            return "No matching tasks found.";
+        }
+        return matches.stream()
+                .map(TaskMatch::toString)
+                .collect(Collectors.joining("\n"));
     }
 
     /**

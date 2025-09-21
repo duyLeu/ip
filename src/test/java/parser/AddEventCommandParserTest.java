@@ -14,7 +14,10 @@ public class AddEventCommandParserTest {
             AddEventCommandParser parser = new AddEventCommandParser();
             parser.parse("event ");
         } catch (ParseException e) {
-            assertEquals("Wuf! Your task name cannot be empty!", e.getMessage());
+            assertEquals("Meow! Your task name cannot be empty! "
+                    + "You should follow this syntax: "
+                    + "event {task description} /from dd/mm/yyyy HHMM {start time} /by dd/mm/yyyy HHMM {end time}",
+                    e.getMessage());
         }
     }
 
@@ -24,7 +27,10 @@ public class AddEventCommandParserTest {
             AddEventCommandParser parser = new AddEventCommandParser();
             parser.parse("event holiday /from 15/03/2025 /to");
         } catch (ParseException e) {
-            assertEquals("Wuf! Both your start and end time cannot be empty!", e.getMessage());
+            assertEquals("Meow! Both your start and end time cannot be empty! "
+                    + "You should follow this syntax: "
+                    + "event {task description} /from dd/mm/yyyy HHMM {start time} /by dd/mm/yyyy HHMM {end time}",
+                    e.getMessage());
         }
     }
 
@@ -34,17 +40,23 @@ public class AddEventCommandParserTest {
             AddEventCommandParser parser = new AddEventCommandParser();
             parser.parse("event holiday /to 15/03/2025");
         } catch (ParseException e) {
-            assertEquals("Wuf! Are you missing a dash '/' or a command somewhere?", e.getMessage());
+            assertEquals("Meow! Are you missing a dash '/' or a command somewhere? "
+                    + "You should follow this syntax: "
+                    + "event {task description} /from dd/mm/yyyy HHMM {start time} /by dd/mm/yyyy HHMM {end time}",
+                    e.getMessage());
         }
     }
 
     @Test
-    public void parse_wrongByKeyword_exceptionThrown() {
+    public void parse_wrongTimeKeyword_exceptionThrown() {
         try {
             AddEventCommandParser parser = new AddEventCommandParser();
             parser.parse("deadline read books /fro 15/03/2025 /to 26/4/2025");
         } catch (ParseException e) {
-            assertEquals("Wuf! I think you make a mistake here: 'fro'", e.getMessage());
+            assertEquals("Meow! I think you make a mistake here: 'fro'."
+                    + " You should follow this syntax:"
+                    + " event {task description} /from dd/mm/yyyy HHMM {start time} /by dd/mm/yyyy HHMM {end time}",
+                    e.getMessage());
         }
     }
 
