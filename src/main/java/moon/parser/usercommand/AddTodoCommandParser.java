@@ -31,6 +31,7 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
      */
     @Override
     public AddTodoCommand parse(String input) throws ParseException {
+        // All FormatCheck methods throw a ParseException if the check is false, return nothing if true
         FormatChecker.checkEmptyParameter(input, COMMAND, false);
 
         String todoName = ExtractString.extract(input, COMMAND.getKeyword());

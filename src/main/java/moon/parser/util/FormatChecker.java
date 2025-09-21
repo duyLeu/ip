@@ -58,14 +58,18 @@ public class FormatChecker {
      */
     public static void checkEmptyParameter(String inputString, Command command, boolean isTaskName)
             throws ParseException {
-        String exceptionMessage = isTaskName
-                ? "Wuf! Your task name cannot be empty!"
-                : switch (command) {
-        case DEADLINE -> "Wuf! Your deadline time cannot be empty!";
-        case EVENT -> "Wuf! Both your start and end time cannot be empty!";
-        default -> throw new ParseException(command,
-                "Wuf! Are you sure you have the correct command?");
-        };
+        String exceptionMessage;
+
+        if (isTaskName) {
+            exceptionMessage = "Wuf! Your task name cannot be empty!";
+        } else {
+            exceptionMessage = switch (command) {
+            case DEADLINE -> "Wuf! Your deadline time cannot be empty!";
+            case EVENT -> "Wuf! Both your start and end time cannot be empty!";
+            default -> throw new ParseException(command,
+                    "Wuf! Are you sure you have the correct command?");
+            };
+        }
 
         if (inputString.split(" ").length <= 1) {
             System.out.println(inputString);

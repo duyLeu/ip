@@ -37,6 +37,7 @@ public class AddEventCommandParser implements CommandParser<AddEventCommand> {
     public AddEventCommand parse(String input) throws ParseException {
         String[] inputList = input.split(" /");
 
+        // All FormatCheck methods throw a ParseException if the check is false, return nothing if true
         FormatChecker.checkEmptyParameter(inputList[0], COMMAND, true);
         FormatChecker.checkCommandFormat(inputList, COMMAND);
 
