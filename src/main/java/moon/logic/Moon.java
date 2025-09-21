@@ -88,6 +88,7 @@ public class Moon {
         } catch (MoonException e) {
             // exceptions returned by parser/commands
             return UiMessages.showExceptionMessage(e.getMessage());
+
         } catch (NoSuchElementException | IOException e) {
             // exceptions returned by scanner or storage
             return UiMessages.showGeneralErrorMessage();
