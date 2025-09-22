@@ -1,7 +1,7 @@
-# DukePro
+# Moon
 > “Your mind is for having ideas, not holding them.” – David Allen
 
-**DukePro frees your mind of having to remember things you need to do. It's,**
+**Moon frees your mind of having to remember things you need to do. It's,**
 
 - text-based
 - easy to learn
@@ -19,14 +19,19 @@ And it is **FREE!**
 ## Features:
 
 - [X] Managing tasks
-- [X] Managing deadlines (coming soon)
+- [X] Intelligent search!
 - [X] Reminders (coming soon)
-If you are a Java programmer, you can use it to practice Java too. Here's the main method:
+  If you are a Java programmer, you can use it to practice Java too. Here's the Launcher method:
 
 ```java
-public class Main {
+public class Launcher {
+    /**
+     * Launches the JavaFX application.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
-        Application.launch(MainApp.class, args);
+        Application.launch(Main.class, args);
     }
 }
 ```

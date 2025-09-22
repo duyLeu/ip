@@ -70,7 +70,7 @@ public final class UiMessages {
 
     /** @return a confirmation message for deleting a task */
     public static String showDeleteTaskMessage(Task deletedTask) {
-        return String.format("Copy that! I've deleted this task! Woof!\n\t%s\n", deletedTask);
+        return String.format("Copy that! I've deleted this task! Meow!\n\t%s\n", deletedTask);
     }
 
     /** @return a formatted list message (or encouragement when empty) */

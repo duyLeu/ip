@@ -1,30 +1,37 @@
-# Duke User Guide
+# Moon
+> “Your mind is for having ideas, not holding them.” – David Allen
 
-// Update the title above to match the actual product name
+**Moon frees your mind of having to remember things you need to do. It's,**
 
-// Product screenshot goes here
+- text-based
+- easy to learn
+- ***FAST. SUPER FAST*** to use
 
-// Product intro goes here
+All you need to do is,
 
-## Adding deadlines
+1. download it from [here](https://github.com/duyLeu/ip/releases/tag/A-Jar).
+2. double-click it.
+3. add your *tasks*.
+4. let it manage your tasks for you 😉
 
-// Describe the action and its outcome.
+And it is **FREE!**
 
-// Give examples of usage
+## Features:
 
-Example: `keyword (optional arguments)`
+- [X] Managing tasks
+- [X] Intelligent search!
+- [X] Reminders (coming soon)
+  If you are a Java programmer, you can use it to practice Java too. Here's the Launcher method:
 
-// A description of the expected outcome goes here
-
+```java
+public class Launcher {
+    /**
+     * Launches the JavaFX application.
+     *
+     * @param args command-line arguments
+     */
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}
 ```
-expected output
-```
-
-## Feature ABC
-
-// Feature details
-
-
-## Feature XYZ
-
-// Feature details
