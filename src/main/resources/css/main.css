@@ -10,7 +10,6 @@
 }
 
 .button {
-    /* keep your color but make it pill + polished */
     -fx-background-color: linear-gradient(mediumspringgreen, #00C08A);
     -fx-text-fill: white;
     -fx-background-radius: 12;
@@ -50,3 +49,10 @@
     -fx-pref-height: 0;
     -fx-opacity: 0;
 }
+
+/*
+I prompted AI to give me a set of colour palette and fonts suitable for
+my chatbot. Given it is themed after cats, I want something that is
+give a cat-cafe vibe. From which I modified the css and java files
+accordingly.
+*/

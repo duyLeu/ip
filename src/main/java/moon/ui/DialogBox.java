@@ -52,7 +52,8 @@ public class DialogBox extends HBox {
         // avatar
         displayPicture.setImage(img);
 
-        //make avatar circular
+        // make avatar circular
+        // Note: this was created with the help of AI
         Circle clip = new Circle();
         clip.centerXProperty().bind(displayPicture.fitWidthProperty().divide(2));
         clip.centerYProperty().bind(displayPicture.fitHeightProperty().divide(2));
@@ -63,6 +64,7 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
 
         // base bubble class (shared styles)
+        dialog.getStyleClass().add("bubble");
     }
 
     /**
