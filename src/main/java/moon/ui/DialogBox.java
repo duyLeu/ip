@@ -3,6 +3,7 @@ package moon.ui;
 import java.io.IOException;
 import java.util.Collections;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 
 /**
  * A chat bubble with an avatar and a text label.
@@ -46,7 +48,21 @@ public class DialogBox extends HBox {
         dialog.setWrapText(true);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.maxWidthProperty().bind(this.widthProperty().subtract(100)); // leave room for avatar/padding
+
+        // avatar
         displayPicture.setImage(img);
+
+        //make avatar circular
+        Circle clip = new Circle();
+        clip.centerXProperty().bind(displayPicture.fitWidthProperty().divide(2));
+        clip.centerYProperty().bind(displayPicture.fitHeightProperty().divide(2));
+        clip.radiusProperty().bind(Bindings.min(
+                displayPicture.fitWidthProperty(),
+                displayPicture.fitHeightProperty()
+        ).divide(2));
+        displayPicture.setClip(clip);
+
+        // base bubble class (shared styles)
     }
 
     /**
@@ -57,14 +73,15 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
     }
 
     /**
      * Factory for a user dialog bubble.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("user-bubble");
+        return db;
     }
 
     /**
@@ -73,6 +90,7 @@ public class DialogBox extends HBox {
     public static DialogBox getMoonDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.getStyleClass().add("bot-bubble");
         return db;
     }
 }

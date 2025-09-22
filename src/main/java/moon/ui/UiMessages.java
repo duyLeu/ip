@@ -107,7 +107,7 @@ public final class UiMessages {
         if (matchedTasks.isEmpty()) {
             return String.format("I can't find any tasks matching your keyword: %s . Meow:(\n", keyword);
         } else {
-            return String.format("I found these tasks matching your keyword!\n%s  Meow!\n",
+            return String.format("I found these tasks matching your keyword!\n%s\nMeow!\n",
                     TaskList.formatTaskMatchList(matchedTasks));
         }
     }
