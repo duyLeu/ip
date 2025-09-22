@@ -51,7 +51,7 @@ public class MoonDateTime {
      *
      * @return A string in the format {@code "MMM d yyyy"} (e.g. "Sep 6 2025")
      */
-    private String getDate() {
+    private String dateToString() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
@@ -61,10 +61,18 @@ public class MoonDateTime {
      * @return A string in the format {@code " HH:mm"} (e.g. " 14:30"),
      *         or an empty string if no time is set
      */
-    private String getTime() {
+    private String timeToString() {
         return this.time
                 .map(t -> " " + t.format(DateTimeFormatter.ofPattern("HH:mm")))
                 .orElse("");
+    }
+
+    public LocalDate date() {
+        return this.date;
+    }
+
+    public Optional<LocalTime> time() {
+        return this.time;
     }
 
     /**
@@ -80,6 +88,6 @@ public class MoonDateTime {
      */
     @Override
     public String toString() {
-        return this.getDate() + this.getTime();
+        return this.dateToString() + this.timeToString();
     }
 }

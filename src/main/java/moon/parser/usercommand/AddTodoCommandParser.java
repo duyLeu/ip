@@ -5,7 +5,7 @@ import moon.commands.enums.Command;
 import moon.models.Todo;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.ExtractString;
-import moon.parser.util.FormatChecker;
+import moon.parser.util.ParseChecker;
 
 /**
  * Parser for the {@link Command#TODO} command.
@@ -32,9 +32,13 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
     @Override
     public AddTodoCommand parse(String input) throws ParseException {
         // All FormatCheck methods throw a ParseException if the check is false, return nothing if true
-        FormatChecker.checkEmptyParameter(input, COMMAND, false);
+        // Here it is checking if the event name parameter is empty
+        ParseChecker.isParameterEmpty(input, COMMAND, false);
 
+        // Extract out the name
         String todoName = ExtractString.extract(input, COMMAND.getKeyword());
+
+        // Create new Todo object from the extracted and formatted name
         Todo newTodo = new Todo(todoName);
         return new AddTodoCommand(newTodo);
     }

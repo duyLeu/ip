@@ -3,7 +3,7 @@ package moon.commands;
 import moon.commands.enums.Command;
 import moon.models.Task;
 import moon.parser.exceptions.InvalidIndexException;
-import moon.parser.util.FormatChecker;
+import moon.parser.util.ParseChecker;
 import moon.ui.UiMessages;
 
 /**
@@ -38,7 +38,7 @@ public class MarkCommand extends BaseCommand {
      */
     @Override
     public String execute() throws InvalidIndexException {
-        FormatChecker.throwExceptionIfOutOfIndex(markedIndex, getList());
+        ParseChecker.isIndexOutOfRange(markedIndex, getList());
         Task taskToMark = getList().get(markedIndex);
 
         if (taskToMark.isDone()) {
