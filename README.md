@@ -84,5 +84,5 @@ public class Launcher {
 ## Upcoming features
 Sit tight, because we have a whole host of new features coming to you as soon as possible
 - [X] Search tasks
-- [] Managing deadlines (coming soon)
-- [] Reminders (coming soon)
+- [ ] Managing deadlines (coming soon)
+- [ ] Reminders (coming soon)
