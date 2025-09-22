@@ -9,7 +9,7 @@
 
 All you need to do is,
 
-1. download it from [here](https://github.com/duyLeu/ip/releases/tag/v3.0).
+1. download it from [here](https://github.com/duyLeu/ip/releases/tag/v3.1).
 2. double-click it.
 3. add your *tasks*.
 4. let it manage your tasks for you :stuck_out_tongue_winking_eye:
