@@ -1,18 +1,18 @@
 # Moon
 > “Your mind is for having ideas, not holding them.” – David Allen
 
-**Moon frees your mind of having to remember things you need to do. It's,**
+***Moon* frees your mind of having to remember things you need to do. It's,**
 
 - text-based
 - easy to learn
-- ***FAST. SUPER FAST*** to use
+- ***~~FAST~~ SUPER FAST*** to use
 
 All you need to do is,
 
-1. download it from [here](https://github.com/duyLeu/ip/releases/tag/A-Jar).
+1. download it from [here](https://github.com/duyLeu/ip/releases/tag/v3.0).
 2. double-click it.
 3. add your *tasks*.
-4. let it manage your tasks for you 😉
+4. let it manage your tasks for you :stuck_out_tongue_winking_eye:
 
 And it is **FREE!**
 
@@ -60,13 +60,13 @@ Once you finished your tasks, you can **delete** it to free up space for new tas
 delete {task number}
 ```
 
-### 5. Find tasks!
+### 5. Find tasks
 Too many tasks and don't know where to find them? @-@ Don't worry! Moon has got you covered!
 Just put in a keyword, or even *part of a keyword*, and Moon will help you find that tasks along with its index number in the task list!
 ```declarative
 find {keyword}
 ```
-
+### 6. Practice Java!
 Additionally, if you are a Java programmer, you can use it to practice Java too. Here's the Launcher method:
 
 ```java
@@ -81,3 +81,8 @@ public class Launcher {
     }
 }
 ```
+## Upcoming features
+Sit tight, because we have a whole host of new features coming to you as soon as possible
+- [X] Search tasks
+- [] Managing deadlines (coming soon)
+- [] Reminders (coming soon)
