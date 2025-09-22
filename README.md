@@ -16,12 +16,58 @@ All you need to do is,
 
 And it is **FREE!**
 
-## Features:
+## Features
+### 1. Add tasks
+#### ToDos
+Tasks without any date/time attached to it e.g., visit new theme park
+```declarative
+todo {task description}
+```
 
-- [X] Managing tasks
-- [X] Intelligent search!
-- [X] Reminders (coming soon)
-  If you are a Java programmer, you can use it to practice Java too. Here's the Launcher method:
+#### Deadlines
+Tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+```declarative
+deadline {task description} /by dd/mm/yyyy HHMM {deadline time}
+```
+(`HHMM` time is optional)
+
+#### Events
+Tasks that start at a specific date/time and ends at a specific date/time e.g.,
+- team project meeting 2/10/2019 2-4pm
+- orientation week 4/10/2019 to 11/10/2019
+```declarative
+event {task description} /from dd/mm/yyyy HHMM {start time} /by dd/mm/yyyy HHMM {end time}
+```
+(`HHMM` time is optional)
+
+### 2. Show list of tasks
+After adding allllll your new tasks, you can ask Moon to show all of them, all at once!
+```declarative
+list
+```
+
+### 3. Mark/Unmark tasks
+You can also choose to **mark**, or **unmark** tasks to show that you have done them, or you still have unfinished tasks!
+```declarative
+mark {task number}
+
+unmark {task number}
+```
+
+### 4. Delete tasks
+Once you finished your tasks, you can **delete** it to free up space for new tasks!
+```declarative
+delete {task number}
+```
+
+### 5. Find tasks!
+Too many tasks and don't know where to find them? @-@ Don't worry! Moon has got you covered!
+Just put in a keyword, or even *part of a keyword*, and Moon will help you find that tasks along with its index number in the task list!
+```declarative
+find {keyword}
+```
+
+Additionally, if you are a Java programmer, you can use it to practice Java too. Here's the Launcher method:
 
 ```java
 public class Launcher {
