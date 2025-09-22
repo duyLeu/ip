@@ -12,7 +12,7 @@ import moon.parser.exceptions.ParseException;
  * Used by the parser layer to ensure user input adheres to the expected syntax
  * before command execution.
  */
-public class FormatChecker {
+public class ParseChecker {
 
     /**
      * Validates that the number of parameters for a command matches its expected format.
@@ -28,7 +28,7 @@ public class FormatChecker {
      * @param command   the command being validated
      * @throws ParseException if the number of parameters is less or more than expected
      */
-    public static void checkCommandFormat(String[] inputList, Command command) throws ParseException {
+    public static void isCommandFormatValid(String[] inputList, Command command) throws ParseException {
         int numOfParameters = switch (command) {
         case TODO -> 1;
         case DEADLINE -> 2;
@@ -56,7 +56,7 @@ public class FormatChecker {
      * @throws EmptyArgumentException if the required argument is empty
      * @throws ParseException         if the command type is unsupported
      */
-    public static void checkEmptyParameter(String inputString, Command command, boolean isTaskName)
+    public static void isParameterEmpty(String inputString, Command command, boolean isTaskName)
             throws ParseException {
         String exceptionMessage;
 
@@ -85,7 +85,7 @@ public class FormatChecker {
      * @param command       the command being validated
      * @throws ParseException if the actual keyword does not match the expected one
      */
-    public static void checkKeyword(String actualInput, String expectedInput, Command command) throws ParseException {
+    public static void isKeywordValid(String actualInput, String expectedInput, Command command) throws ParseException {
         if (!actualInput.equals(expectedInput)) {
             throw new ParseException(command,
                     String.format("Meow! I think you make a mistake here: '%s'.", actualInput));
@@ -93,13 +93,13 @@ public class FormatChecker {
     }
 
     /**
-     * Throws an exception if the given index is out of bounds for the task list.
+     * Check if the given index is out of bounds for the task list.
      *
      * @param index the index to check
      * @param list  the task list being accessed
      * @throws InvalidIndexException if the index is negative or greater than/equal to the list size
      */
-    public static void throwExceptionIfOutOfIndex(int index, TaskList list) throws InvalidIndexException {
+    public static void isIndexOutOfRange(int index, TaskList list) throws InvalidIndexException {
         if (index < 0 || index >= list.size()) {
             throw new InvalidIndexException(Command.DELETE,
                     "Meow! Your index is out of range!");

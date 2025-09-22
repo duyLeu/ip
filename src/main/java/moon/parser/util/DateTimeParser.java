@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import moon.models.MoonDateTime;
+import moon.parser.exceptions.DateTimeException;
 import moon.parser.exceptions.ParseException;
 
 /**
@@ -40,7 +41,7 @@ public class DateTimeParser {
         return tryParseDateTime(input, isFromStorage)
                 .map(dt -> MoonDateTime.of(dt.toLocalDate(), dt.toLocalTime()))
                 .or(() -> tryParseDate(input, isFromStorage).map(MoonDateTime::ofDate))
-                .orElseThrow(() -> new ParseException("Could not parse date/time: " + input));
+                .orElseThrow(() -> new DateTimeException("Could not parse date/time: " + input));
     }
 
     /**
