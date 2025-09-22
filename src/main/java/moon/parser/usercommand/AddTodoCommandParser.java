@@ -21,6 +21,7 @@ import moon.parser.util.ParseChecker;
  */
 public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
     private static final Command COMMAND = Command.TODO;
+    private static final boolean IS_TASK_NAME = true;
 
     /**
      * Parses a user input string into an {@link AddTodoCommand}.
@@ -33,12 +34,10 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
     public AddTodoCommand parse(String input) throws ParseException {
         // All FormatCheck methods throw a ParseException if the check is false, return nothing if true
         // Here it is checking if the event name parameter is empty
-        ParseChecker.isParameterEmpty(input, COMMAND, false);
+        ParseChecker.isParameterEmpty(input, COMMAND, IS_TASK_NAME);
 
-        // Extract out the name
         String todoName = ExtractString.extract(input, COMMAND.getKeyword());
 
-        // Create new Todo object from the extracted and formatted name
         Todo newTodo = new Todo(todoName);
         return new AddTodoCommand(newTodo);
     }

@@ -17,7 +17,7 @@ public class ExtractString {
      *
      * <pre>
      * Example:
-     *   input   = "delete 2"
+     *   input   = "delete   2  "
      *   exclude = "delete"
      *   result  = "2"
      * </pre>

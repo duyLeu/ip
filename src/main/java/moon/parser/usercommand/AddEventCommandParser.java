@@ -4,6 +4,7 @@ import moon.commands.AddEventCommand;
 import moon.commands.enums.Command;
 import moon.models.Event;
 import moon.models.MoonDateTime;
+import moon.parser.exceptions.DateTimeException;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.DateTimeChecker;
 import moon.parser.util.DateTimeParser;
@@ -26,6 +27,8 @@ public class AddEventCommandParser implements CommandParser<AddEventCommand> {
     private static final Command COMMAND = Command.EVENT;
     private static final String PREFIX_FROM = "from";
     private static final String PREFIX_TO = "to";
+    private static final boolean IS_TASK_NAME = true;
+    private static final boolean IS_FROM_STORAGE = false;
 
     /**
      * Parses a user input string into an {@link AddEventCommand}.
@@ -36,38 +39,52 @@ public class AddEventCommandParser implements CommandParser<AddEventCommand> {
      */
     @Override
     public AddEventCommand parse(String input) throws ParseException {
-        String[] inputList = input.split(" /");
+        String[] inputList = input.trim().split("\\s+/");
 
         // All FormatCheck methods throw a ParseException if the check is false, return nothing if true
         // Here it is checking if the event name parameter is empty,
-        // and that is there 3 parts separated by the "/"
-        ParseChecker.isParameterEmpty(inputList[0], COMMAND, true);
+        // and that there are 2 parts separated by "/"
+        ParseChecker.isParameterEmpty(inputList[0], COMMAND, IS_TASK_NAME);
         ParseChecker.isCommandFormatValid(inputList, COMMAND);
 
-        // Extract out the name and the keywords "from" and "to" to check
         String eventName = ExtractString.extract(inputList[0], COMMAND.getKeyword());
-        String fromKeyword = inputList[1].split("\\s+")[0];
-        String toKeyword = inputList[2].split("\\s+")[0];
 
-        // Check if 1) The keywords are there; 2) The time parameters are there
-        ParseChecker.isKeywordValid(fromKeyword, PREFIX_FROM, COMMAND);
-        ParseChecker.isKeywordValid(toKeyword, PREFIX_TO, COMMAND);
-        ParseChecker.isParameterEmpty(inputList[1], COMMAND, false);
-        ParseChecker.isParameterEmpty(inputList[2], COMMAND, false);
+        isParameterValid(inputList[1], PREFIX_FROM);
+        isParameterValid(inputList[2], PREFIX_TO);
 
-        // Extract the from and to date/time.
-        // Second parameter of DateTimeParser.parse() is false because it is not extracting from Storage
-        MoonDateTime fromTime = DateTimeParser.parse(
-                ExtractString.extract(inputList[1], PREFIX_FROM),
-                false);
-        MoonDateTime toTime = DateTimeParser.parse(
-                ExtractString.extract(inputList[2], PREFIX_TO),
-                false);
+        // Extract the from and to date/time
+        MoonDateTime fromTime = parseDateTime(inputList[1], PREFIX_FROM);
+        MoonDateTime toTime = parseDateTime(inputList[2], PREFIX_TO);
         assert fromTime != null && toTime != null : "DateTimeParser should always return a MoonDateTime or throw";
         DateTimeChecker.isValidEventRange(fromTime, toTime);
 
-        // Create new Event object from the extracted and formatted name and dates
         Event newEvent = new Event(eventName, fromTime, toTime);
         return new AddEventCommand(newEvent);
+    }
+
+    /**
+     * Parses a prefixed date/time token (e.g., "from 12/12/2025 1800") into a {@link MoonDateTime}.
+     * Removes the given prefix and delegates parsing to {@link DateTimeParser}.
+     *
+     * @param s       the raw token containing the prefix and date/time
+     * @param exclude the prefix to remove (e.g., "from" or "to")
+     * @return parsed {@link MoonDateTime}
+     * @throws DateTimeException if the date/time is missing or invalid
+     */
+    private MoonDateTime parseDateTime(String s, String exclude) throws DateTimeException {
+        String rawTime = ExtractString.extract(s, exclude);
+        return DateTimeParser.parse(rawTime, IS_FROM_STORAGE);
+    }
+
+    /**
+     * Validates that a parameter starts with the expected prefix and has a non-empty value.
+     *
+     * @param s      the raw token (e.g., "from 12/12/2025 1800")
+     * @param prefix the expected prefix (e.g., "from" or "to")
+     * @throws ParseException if the prefix is wrong or the value is empty
+     */
+    private void isParameterValid(String s, String prefix) throws ParseException {
+        ParseChecker.isKeywordValid(s.split("\\s+")[0], prefix, COMMAND);
+        ParseChecker.isParameterEmpty(s, COMMAND, !IS_TASK_NAME);
     }
 }

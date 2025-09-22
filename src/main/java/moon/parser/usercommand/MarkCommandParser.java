@@ -29,7 +29,7 @@ public class MarkCommandParser implements CommandParser<MarkCommand> {
     @Override
     public MarkCommand parse(String input) throws InvalidIndexException {
         try {
-            int taskIndex = Integer.parseInt(input.split("\\s+")[1].trim()) - 1;
+            int taskIndex = Integer.parseInt(input.split("\\s+")[1]) - 1;
             return new MarkCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new InvalidIndexException(Command.MARK,

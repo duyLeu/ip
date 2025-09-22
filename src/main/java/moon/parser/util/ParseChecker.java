@@ -71,7 +71,7 @@ public class ParseChecker {
             };
         }
 
-        if (inputString.split(" ").length <= 1) {
+        if (inputString.split("\\s+").length <= 1) {
             System.out.println(inputString);
             throw new EmptyArgumentException(command, exceptionMessage);
         }
@@ -86,7 +86,7 @@ public class ParseChecker {
      * @throws ParseException if the actual keyword does not match the expected one
      */
     public static void isKeywordValid(String actualInput, String expectedInput, Command command) throws ParseException {
-        if (!actualInput.equals(expectedInput)) {
+        if (!actualInput.equalsIgnoreCase(expectedInput)) {
             throw new ParseException(command,
                     String.format("Meow! I think you make a mistake here: '%s'.", actualInput));
         }

@@ -4,6 +4,7 @@ import moon.commands.AddDeadlineCommand;
 import moon.commands.enums.Command;
 import moon.models.Deadline;
 import moon.models.MoonDateTime;
+import moon.parser.exceptions.DateTimeException;
 import moon.parser.exceptions.ParseException;
 import moon.parser.util.DateTimeChecker;
 import moon.parser.util.DateTimeParser;
@@ -25,6 +26,8 @@ import moon.parser.util.ParseChecker;
 public class AddDeadlineCommandParser implements CommandParser<AddDeadlineCommand> {
     private static final Command COMMAND = Command.DEADLINE;
     private static final String PREFIX_BY = "by";
+    private static final boolean IS_TASK_NAME = true;
+    private static final boolean IS_FROM_STORAGE = false;
 
     /**
      * Parses a user input string into an {@link AddDeadlineCommand}.
@@ -36,32 +39,49 @@ public class AddDeadlineCommandParser implements CommandParser<AddDeadlineComman
      */
     @Override
     public AddDeadlineCommand parse(String input) throws ParseException {
-        String[] inputList = input.split(" /");
+        String[] inputList = input.trim().split("\\s+/");
 
         // All FormatCheck methods throw a ParseException if the check is false, return nothing if true
         // Here it is checking if the event name parameter is empty,
-        // and that is there 3 parts separated by the "/"
-        ParseChecker.isParameterEmpty(inputList[0], COMMAND, true);
+        // and that there are 3 parts separated by "/"
+        ParseChecker.isParameterEmpty(inputList[0], COMMAND, IS_TASK_NAME);
         ParseChecker.isCommandFormatValid(inputList, COMMAND);
 
         // Extract out the name and the keyword "by" to check
         String deadlineName = ExtractString.extract(inputList[0], COMMAND.getKeyword());
-        String byKeyword = inputList[1].split("\\s+")[0];
 
-        // Check if 1) The keyword is there; 2) The time parameter is there
-        ParseChecker.isKeywordValid(byKeyword, PREFIX_BY, COMMAND);
-        ParseChecker.isParameterEmpty(inputList[1], COMMAND, false);
+        isParameterValid(inputList[1]);
 
-        // Extract the by date/time.
-        // Second parameter of DateTimeParser.parse() is false because it is not extracting from Storage
-        MoonDateTime deadlineTime = DateTimeParser.parse(
-                ExtractString.extract(inputList[1], PREFIX_BY),
-                false);
+        // Extract the by date/time
+        MoonDateTime deadlineTime = parseDateTime(inputList[1]);
         assert deadlineTime != null : "DateTimeParser should always return a MoonDateTime or throw";
         DateTimeChecker.isNotBeforeToday(deadlineTime);
 
-        // Create new Deadline object from the extracted and formatted name and dates
         Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
         return new AddDeadlineCommand(newDeadline);
+    }
+
+    /**
+     * Parses a prefixed date/time token (e.g., "by 12/12/2025 1800") into a {@link MoonDateTime}.
+     * Removes the given prefix and delegates parsing to {@link DateTimeParser}.
+     *
+     * @param s       the raw token containing the prefix and date/time
+     * @return parsed {@link MoonDateTime}
+     * @throws DateTimeException if the date/time is missing or invalid
+     */
+    private MoonDateTime parseDateTime(String s) throws DateTimeException {
+        String rawTime = ExtractString.extract(s, PREFIX_BY);
+        return DateTimeParser.parse(rawTime, IS_FROM_STORAGE);
+    }
+
+    /**
+     * Validates that a parameter starts with the expected prefix and has a non-empty value.
+     *
+     * @param s      the raw token (e.g., "by 12/12/2025 1800")
+     * @throws ParseException if the prefix is wrong or the value is empty
+     */
+    private void isParameterValid(String s) throws ParseException {
+        ParseChecker.isKeywordValid(s.split("\\s+")[0], PREFIX_BY, COMMAND);
+        ParseChecker.isParameterEmpty(s, COMMAND, !IS_TASK_NAME);
     }
 }

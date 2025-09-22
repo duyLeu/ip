@@ -55,7 +55,7 @@ public class UserInputParser {
 
         return Command.getCommandStream()
                 .parallel() // parallel for potential speedup when scanning all enums
-                .filter(c -> c.getKeyword().equals(inputKeyword))
+                .filter(c -> c.getKeyword().equalsIgnoreCase(inputKeyword))
                 .findFirst()
                 .orElseThrow(() -> new InvalidCommandException(
                         inputKeyword,

@@ -35,9 +35,9 @@ public class DateTimeParser {
      * @param isFromStorage true if the input string comes from storage (already formatted),
      *                      false if the input comes directly from user input
      * @return a {@link MoonDateTime} representing the parsed date or date-time
-     * @throws ParseException if the input cannot be parsed into either a date or a date-time
+     * @throws DateTimeException if the input cannot be parsed into either a date or a date-time
      */
-    public static MoonDateTime parse(String input, boolean isFromStorage) throws ParseException {
+    public static MoonDateTime parse(String input, boolean isFromStorage) throws DateTimeException {
         return tryParseDateTime(input, isFromStorage)
                 .map(dt -> MoonDateTime.of(dt.toLocalDate(), dt.toLocalTime()))
                 .or(() -> tryParseDate(input, isFromStorage).map(MoonDateTime::ofDate))
